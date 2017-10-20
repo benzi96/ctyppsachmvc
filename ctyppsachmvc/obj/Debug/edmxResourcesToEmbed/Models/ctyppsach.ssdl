@@ -1,0 +1,435 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ctyppsachModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="congnotheothoigian">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="iddl" Type="int" />
+    <Property Name="congno" Type="decimal" Precision="10" Scale="1" />
+    <Property Name="thoidiem" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ctdmsdb">
+    <Key>
+      <PropertyRef Name="idctdmsdb" />
+      <PropertyRef Name="iddmsdb" />
+    </Key>
+    <Property Name="idctdmsdb" Type="int" Nullable="false" />
+    <Property Name="iddmsdb" Type="int" Nullable="false" />
+    <Property Name="idht" Type="int" />
+    <Property Name="soluongdaban" Type="int" />
+  </EntityType>
+  <EntityType Name="ctpn">
+    <Key>
+      <PropertyRef Name="idpn" />
+      <PropertyRef Name="idctpn" />
+    </Key>
+    <Property Name="idpn" Type="int" Nullable="false" />
+    <Property Name="idctpn" Type="int" Nullable="false" />
+    <Property Name="idsach" Type="int" />
+    <Property Name="soluong" Type="int" />
+  </EntityType>
+  <EntityType Name="ctpx">
+    <Key>
+      <PropertyRef Name="idpx" />
+      <PropertyRef Name="idctpx" />
+    </Key>
+    <Property Name="idpx" Type="int" Nullable="false" />
+    <Property Name="idctpx" Type="int" Nullable="false" />
+    <Property Name="idsach" Type="int" />
+    <Property Name="soluong" Type="int" />
+  </EntityType>
+  <EntityType Name="daily">
+    <Key>
+      <PropertyRef Name="iddl" />
+    </Key>
+    <Property Name="iddl" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="tendl" Type="nvarchar" MaxLength="50" />
+    <Property Name="diachi" Type="nvarchar" MaxLength="50" />
+    <Property Name="sodt" Type="nvarchar" MaxLength="15" />
+  </EntityType>
+  <EntityType Name="danhmucsachdaban">
+    <Key>
+      <PropertyRef Name="iddmsdb" />
+    </Key>
+    <Property Name="iddmsdb" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="iddl" Type="int" />
+    <Property Name="thoigian" Type="datetime" />
+    <Property Name="sotiendathanhtoan" Type="decimal" Precision="10" Scale="1" />
+    <Property Name="sotienconno" Type="decimal" Precision="10" Scale="1" />
+  </EntityType>
+  <EntityType Name="hangtoncuadaily">
+    <Key>
+      <PropertyRef Name="idht" />
+    </Key>
+    <Property Name="idht" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="iddl" Type="int" />
+    <Property Name="idsach" Type="int" />
+    <Property Name="soluongchuaban" Type="int" />
+  </EntityType>
+  <EntityType Name="linhvuc">
+    <Key>
+      <PropertyRef Name="idlv" />
+    </Key>
+    <Property Name="idlv" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="tenlv" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="nxb">
+    <Key>
+      <PropertyRef Name="idnxb" />
+    </Key>
+    <Property Name="idnxb" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="tennxb" Type="nvarchar" MaxLength="50" />
+    <Property Name="diachi" Type="nvarchar" MaxLength="50" />
+    <Property Name="sodt" Type="nvarchar" MaxLength="15" />
+    <Property Name="sotk" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="phieunhap">
+    <Key>
+      <PropertyRef Name="idpn" />
+    </Key>
+    <Property Name="idpn" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idnxb" Type="int" />
+    <Property Name="nguoigiaosach" Type="nvarchar" MaxLength="50" />
+    <Property Name="ngaynhap" Type="datetime" />
+    <Property Name="nguoivietphieu" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="phieutratien">
+    <Key>
+      <PropertyRef Name="idptt" />
+    </Key>
+    <Property Name="idptt" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idnxb" Type="int" />
+    <Property Name="sotientra" Type="decimal" Precision="10" Scale="1" />
+    <Property Name="tinhtrang" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="phieuxuat">
+    <Key>
+      <PropertyRef Name="idpx" />
+    </Key>
+    <Property Name="idpx" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="iddl" Type="int" />
+    <Property Name="nguoinhan" Type="nvarchar" MaxLength="50" />
+    <Property Name="ngayxuat" Type="datetime" />
+  </EntityType>
+  <EntityType Name="sach">
+    <Key>
+      <PropertyRef Name="idsach" />
+    </Key>
+    <Property Name="idsach" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="tensach" Type="nvarchar" MaxLength="50" />
+    <Property Name="tacgia" Type="nvarchar" MaxLength="50" />
+    <Property Name="idnxb" Type="int" />
+    <Property Name="idlv" Type="int" />
+    <Property Name="soluong" Type="int" />
+    <Property Name="giaxuat" Type="decimal" Precision="10" Scale="1" />
+    <Property Name="gianhap" Type="decimal" Precision="10" Scale="1" />
+  </EntityType>
+  <EntityType Name="sotienphaitrachonxb">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idnxb" Type="int" />
+    <Property Name="sotienphaitra" Type="decimal" Precision="10" Scale="1" />
+  </EntityType>
+  <EntityType Name="tonkho">
+    <Key>
+      <PropertyRef Name="idtk" />
+    </Key>
+    <Property Name="idtk" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idsach" Type="int" Nullable="false" />
+    <Property Name="thoidiem" Type="datetime" Nullable="false" />
+    <Property Name="soluongton" Type="int" />
+    <Property Name="idphieu" Type="int" />
+  </EntityType>
+  <Association Name="FK__congnotheo__iddl__4222D4EF">
+    <End Role="daily" Type="Self.daily" Multiplicity="0..1" />
+    <End Role="congnotheothoigian" Type="Self.congnotheothoigian" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="daily">
+        <PropertyRef Name="iddl" />
+      </Principal>
+      <Dependent Role="congnotheothoigian">
+        <PropertyRef Name="iddl" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ctdmsdb__iddmsdb__778AC167">
+    <End Role="danhmucsachdaban" Type="Self.danhmucsachdaban" Multiplicity="1" />
+    <End Role="ctdmsdb" Type="Self.ctdmsdb" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="danhmucsachdaban">
+        <PropertyRef Name="iddmsdb" />
+      </Principal>
+      <Dependent Role="ctdmsdb">
+        <PropertyRef Name="iddmsdb" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ctdmsdb__idht__787EE5A0">
+    <End Role="hangtoncuadaily" Type="Self.hangtoncuadaily" Multiplicity="0..1" />
+    <End Role="ctdmsdb" Type="Self.ctdmsdb" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="hangtoncuadaily">
+        <PropertyRef Name="idht" />
+      </Principal>
+      <Dependent Role="ctdmsdb">
+        <PropertyRef Name="idht" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ctpn__idpn__6FE99F9F">
+    <End Role="phieunhap" Type="Self.phieunhap" Multiplicity="1" />
+    <End Role="ctpn" Type="Self.ctpn" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="phieunhap">
+        <PropertyRef Name="idpn" />
+      </Principal>
+      <Dependent Role="ctpn">
+        <PropertyRef Name="idpn" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ctpn__idsach__70DDC3D8">
+    <End Role="sach" Type="Self.sach" Multiplicity="0..1" />
+    <End Role="ctpn" Type="Self.ctpn" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="sach">
+        <PropertyRef Name="idsach" />
+      </Principal>
+      <Dependent Role="ctpn">
+        <PropertyRef Name="idsach" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ctpx__idpx__73BA3083">
+    <End Role="phieuxuat" Type="Self.phieuxuat" Multiplicity="1" />
+    <End Role="ctpx" Type="Self.ctpx" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="phieuxuat">
+        <PropertyRef Name="idpx" />
+      </Principal>
+      <Dependent Role="ctpx">
+        <PropertyRef Name="idpx" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ctpx__idsach__74AE54BC">
+    <End Role="sach" Type="Self.sach" Multiplicity="0..1" />
+    <End Role="ctpx" Type="Self.ctpx" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="sach">
+        <PropertyRef Name="idsach" />
+      </Principal>
+      <Dependent Role="ctpx">
+        <PropertyRef Name="idsach" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__danhmucsac__iddl__44FF419A">
+    <End Role="daily" Type="Self.daily" Multiplicity="0..1" />
+    <End Role="danhmucsachdaban" Type="Self.danhmucsachdaban" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="daily">
+        <PropertyRef Name="iddl" />
+      </Principal>
+      <Dependent Role="danhmucsachdaban">
+        <PropertyRef Name="iddl" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__hangtoncu__idsac__3E52440B">
+    <End Role="sach" Type="Self.sach" Multiplicity="0..1" />
+    <End Role="hangtoncuadaily" Type="Self.hangtoncuadaily" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="sach">
+        <PropertyRef Name="idsach" />
+      </Principal>
+      <Dependent Role="hangtoncuadaily">
+        <PropertyRef Name="idsach" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__hangtoncua__iddl__3D5E1FD2">
+    <End Role="daily" Type="Self.daily" Multiplicity="0..1" />
+    <End Role="hangtoncuadaily" Type="Self.hangtoncuadaily" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="daily">
+        <PropertyRef Name="iddl" />
+      </Principal>
+      <Dependent Role="hangtoncuadaily">
+        <PropertyRef Name="iddl" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__phieunhap__idnxb__2D27B809">
+    <End Role="nxb" Type="Self.nxb" Multiplicity="0..1" />
+    <End Role="phieunhap" Type="Self.phieunhap" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="nxb">
+        <PropertyRef Name="idnxb" />
+      </Principal>
+      <Dependent Role="phieunhap">
+        <PropertyRef Name="idnxb" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__phieutrat__idnxb__4E88ABD4">
+    <End Role="nxb" Type="Self.nxb" Multiplicity="0..1" />
+    <End Role="phieutratien" Type="Self.phieutratien" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="nxb">
+        <PropertyRef Name="idnxb" />
+      </Principal>
+      <Dependent Role="phieutratien">
+        <PropertyRef Name="idnxb" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__phieuxuat__iddl__33D4B598">
+    <End Role="daily" Type="Self.daily" Multiplicity="0..1" />
+    <End Role="phieuxuat" Type="Self.phieuxuat" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="daily">
+        <PropertyRef Name="iddl" />
+      </Principal>
+      <Dependent Role="phieuxuat">
+        <PropertyRef Name="iddl" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__sach__idlv__2A4B4B5E">
+    <End Role="linhvuc" Type="Self.linhvuc" Multiplicity="0..1" />
+    <End Role="sach" Type="Self.sach" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="linhvuc">
+        <PropertyRef Name="idlv" />
+      </Principal>
+      <Dependent Role="sach">
+        <PropertyRef Name="idlv" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__sach__idnxb__29572725">
+    <End Role="nxb" Type="Self.nxb" Multiplicity="0..1" />
+    <End Role="sach" Type="Self.sach" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="nxb">
+        <PropertyRef Name="idnxb" />
+      </Principal>
+      <Dependent Role="sach">
+        <PropertyRef Name="idnxb" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__sotienpha__idnxb__4BAC3F29">
+    <End Role="nxb" Type="Self.nxb" Multiplicity="0..1" />
+    <End Role="sotienphaitrachonxb" Type="Self.sotienphaitrachonxb" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="nxb">
+        <PropertyRef Name="idnxb" />
+      </Principal>
+      <Dependent Role="sotienphaitrachonxb">
+        <PropertyRef Name="idnxb" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tonkho__idsach__5DCAEF64">
+    <End Role="sach" Type="Self.sach" Multiplicity="1" />
+    <End Role="tonkho" Type="Self.tonkho" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="sach">
+        <PropertyRef Name="idsach" />
+      </Principal>
+      <Dependent Role="tonkho">
+        <PropertyRef Name="idsach" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ctyppsachModelStoreContainer">
+    <EntitySet Name="congnotheothoigian" EntityType="Self.congnotheothoigian" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ctdmsdb" EntityType="Self.ctdmsdb" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ctpn" EntityType="Self.ctpn" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ctpx" EntityType="Self.ctpx" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="daily" EntityType="Self.daily" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="danhmucsachdaban" EntityType="Self.danhmucsachdaban" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="hangtoncuadaily" EntityType="Self.hangtoncuadaily" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="linhvuc" EntityType="Self.linhvuc" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="nxb" EntityType="Self.nxb" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="phieunhap" EntityType="Self.phieunhap" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="phieutratien" EntityType="Self.phieutratien" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="phieuxuat" EntityType="Self.phieuxuat" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sach" EntityType="Self.sach" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sotienphaitrachonxb" EntityType="Self.sotienphaitrachonxb" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tonkho" EntityType="Self.tonkho" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__congnotheo__iddl__4222D4EF" Association="Self.FK__congnotheo__iddl__4222D4EF">
+      <End Role="daily" EntitySet="daily" />
+      <End Role="congnotheothoigian" EntitySet="congnotheothoigian" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ctdmsdb__iddmsdb__778AC167" Association="Self.FK__ctdmsdb__iddmsdb__778AC167">
+      <End Role="danhmucsachdaban" EntitySet="danhmucsachdaban" />
+      <End Role="ctdmsdb" EntitySet="ctdmsdb" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ctdmsdb__idht__787EE5A0" Association="Self.FK__ctdmsdb__idht__787EE5A0">
+      <End Role="hangtoncuadaily" EntitySet="hangtoncuadaily" />
+      <End Role="ctdmsdb" EntitySet="ctdmsdb" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ctpn__idpn__6FE99F9F" Association="Self.FK__ctpn__idpn__6FE99F9F">
+      <End Role="phieunhap" EntitySet="phieunhap" />
+      <End Role="ctpn" EntitySet="ctpn" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ctpn__idsach__70DDC3D8" Association="Self.FK__ctpn__idsach__70DDC3D8">
+      <End Role="sach" EntitySet="sach" />
+      <End Role="ctpn" EntitySet="ctpn" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ctpx__idpx__73BA3083" Association="Self.FK__ctpx__idpx__73BA3083">
+      <End Role="phieuxuat" EntitySet="phieuxuat" />
+      <End Role="ctpx" EntitySet="ctpx" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ctpx__idsach__74AE54BC" Association="Self.FK__ctpx__idsach__74AE54BC">
+      <End Role="sach" EntitySet="sach" />
+      <End Role="ctpx" EntitySet="ctpx" />
+    </AssociationSet>
+    <AssociationSet Name="FK__danhmucsac__iddl__44FF419A" Association="Self.FK__danhmucsac__iddl__44FF419A">
+      <End Role="daily" EntitySet="daily" />
+      <End Role="danhmucsachdaban" EntitySet="danhmucsachdaban" />
+    </AssociationSet>
+    <AssociationSet Name="FK__hangtoncu__idsac__3E52440B" Association="Self.FK__hangtoncu__idsac__3E52440B">
+      <End Role="sach" EntitySet="sach" />
+      <End Role="hangtoncuadaily" EntitySet="hangtoncuadaily" />
+    </AssociationSet>
+    <AssociationSet Name="FK__hangtoncua__iddl__3D5E1FD2" Association="Self.FK__hangtoncua__iddl__3D5E1FD2">
+      <End Role="daily" EntitySet="daily" />
+      <End Role="hangtoncuadaily" EntitySet="hangtoncuadaily" />
+    </AssociationSet>
+    <AssociationSet Name="FK__phieunhap__idnxb__2D27B809" Association="Self.FK__phieunhap__idnxb__2D27B809">
+      <End Role="nxb" EntitySet="nxb" />
+      <End Role="phieunhap" EntitySet="phieunhap" />
+    </AssociationSet>
+    <AssociationSet Name="FK__phieutrat__idnxb__4E88ABD4" Association="Self.FK__phieutrat__idnxb__4E88ABD4">
+      <End Role="nxb" EntitySet="nxb" />
+      <End Role="phieutratien" EntitySet="phieutratien" />
+    </AssociationSet>
+    <AssociationSet Name="FK__phieuxuat__iddl__33D4B598" Association="Self.FK__phieuxuat__iddl__33D4B598">
+      <End Role="daily" EntitySet="daily" />
+      <End Role="phieuxuat" EntitySet="phieuxuat" />
+    </AssociationSet>
+    <AssociationSet Name="FK__sach__idlv__2A4B4B5E" Association="Self.FK__sach__idlv__2A4B4B5E">
+      <End Role="linhvuc" EntitySet="linhvuc" />
+      <End Role="sach" EntitySet="sach" />
+    </AssociationSet>
+    <AssociationSet Name="FK__sach__idnxb__29572725" Association="Self.FK__sach__idnxb__29572725">
+      <End Role="nxb" EntitySet="nxb" />
+      <End Role="sach" EntitySet="sach" />
+    </AssociationSet>
+    <AssociationSet Name="FK__sotienpha__idnxb__4BAC3F29" Association="Self.FK__sotienpha__idnxb__4BAC3F29">
+      <End Role="nxb" EntitySet="nxb" />
+      <End Role="sotienphaitrachonxb" EntitySet="sotienphaitrachonxb" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tonkho__idsach__5DCAEF64" Association="Self.FK__tonkho__idsach__5DCAEF64">
+      <End Role="sach" EntitySet="sach" />
+      <End Role="tonkho" EntitySet="tonkho" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,74 @@
+﻿@model ctyppsachmvc.Models.sach
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>sach</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.tensach)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tensach)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tacgia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tacgia)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.soluong)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.soluong)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.giaxuat)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.giaxuat)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.gianhap)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.gianhap)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.linhvuc.tenlv)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.linhvuc.tenlv)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.nxb.tennxb)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nxb.tennxb)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.idsach }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

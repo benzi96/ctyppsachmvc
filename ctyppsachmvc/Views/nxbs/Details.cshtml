@@ -1,0 +1,50 @@
+﻿@model ctyppsachmvc.Models.nxb
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>nxb</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.tennxb)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tennxb)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.diachi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.diachi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.sodt)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.sodt)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.sotk)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.sotk)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.idnxb }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

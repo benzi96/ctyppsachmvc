@@ -1,0 +1,45 @@
+﻿@model IEnumerable<ctyppsachmvc.Models.phieuxuat>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.nguoinhan)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ngayxuat)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.daily.tendl)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.nguoinhan)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ngayxuat)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.daily.tendl)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.idpx }) |
+            @Html.ActionLink("Details", "Details", new { id=item.idpx }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.idpx })
+        </td>
+    </tr>
+}
+
+</table>

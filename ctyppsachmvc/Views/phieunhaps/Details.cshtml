@@ -1,0 +1,85 @@
+﻿@model ctyppsachmvc.Models.phieunhap
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>phieunhap</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayName("Người giao sách")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nguoigiaosach)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Ngày nhập")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ngaynhap)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Người viết phiếu")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nguoivietphieu)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Tên nhà xuất bản")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nxb.tennxb)
+        </dd>
+
+    </dl>
+</div>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("Tên sách")
+        </th>
+        <th>
+            @Html.DisplayName("Số lượng nhập")
+        </th>
+        <th></th>
+    </tr>
+
+    @if (Model.ctpn != null)
+    {
+        foreach (var item in Model.ctpn)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.sach.tensach)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.soluong)
+                </td>
+             </tr>
+        }
+    }
+    else
+    { 
+         <tr>
+             <td>
+                 Không có chi tiết
+             </td>
+         </tr> 
+    }  
+</table>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.idpn }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

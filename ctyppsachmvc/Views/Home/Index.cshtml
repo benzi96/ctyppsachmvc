@@ -1,0 +1,45 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1>Công ty phân phối sách</h1>
+    <p class="lead">Demo chức năng</p>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <h2>@Html.ActionLink("Phiếu nhập","Index","phieunhaps")</h2>
+        <p>
+            Nhập sách mới từ nhà xuất bản
+        </p>
+        <p><a class="btn btn-default" href="phieunhaps">Learn more &raquo;</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>@Html.ActionLink("Sách", "Index", "saches")</h2>
+        <p>Thêm sách vào database</p>
+        <p><a class="btn btn-default" href="saches">Learn more &raquo;</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>@Html.ActionLink("Nhà xuất bản", "Index", "nxbs")</h2>
+        <p>Thêm Nhà xuất bản vào database</p>
+        <p><a class="btn btn-default" href="nxbs">Learn more &raquo;</a></p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <h2>@Html.ActionLink("Phiếu xuất", "Index", "phieuxuats")</h2>
+        <p>Xuất sách cho đại lý</p>
+        <p><a class="btn btn-default" href="phieuxuats">Learn more &raquo;</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>@Html.ActionLink("Tồn kho", "Index", "tonkhoes")</h2>
+        <p>Tìm tồn kho tại một thời điểm</p>
+        <p><a class="btn btn-default" href="phieuxuats">Learn more &raquo;</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>@Html.ActionLink("Danh mục sách đã bán của đại lý", "Index", "danhmucsachdabans")</h2>
+        <p>Thêm báo cáo gửi về từ đại lý</p>
+        <p><a class="btn btn-default" href="danhmucsachdabans">Learn more &raquo;</a></p>
+    </div>
+</div>

@@ -1,0 +1,63 @@
+﻿@model IEnumerable<ctyppsachmvc.Models.tonkho>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+@using (Html.BeginForm("Index","tonkhoes",FormMethod.Get))
+{
+    <div class="form-inline">
+        @Html.Label("Thời điểm")
+        <div class="form-group input-group-sm">
+            @Html.TextBox("thoidiem", null, new { @class = "form-control datepicker", placeholder = "Enter Drop-off date here...", autocomplete = "off" })
+        </div>
+        @*<input type="date" class="form-control"/>*@
+        <div class="form-group">
+            <div>
+                <input type="submit" value="Index" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+<hr />
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.thoidiem)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.soluongton)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.idphieu)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.sach.tensach)
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.thoidiem)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.soluongton)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.idphieu)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.sach.tensach)
+        </td>
+    </tr>
+}
+
+</table>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jqueryui")
+    @Scripts.Render("~/bundles/mycustomjquery")
+}

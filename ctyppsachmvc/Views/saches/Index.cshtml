@@ -1,0 +1,69 @@
+﻿@model IEnumerable<ctyppsachmvc.Models.sach>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.tensach)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tacgia)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.soluong)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.giaxuat)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.gianhap)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.linhvuc.tenlv)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.nxb.tennxb)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.tensach)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tacgia)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.soluong)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.giaxuat)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.gianhap)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.linhvuc.tenlv)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.nxb.tennxb)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.idsach }) |
+            @Html.ActionLink("Details", "Details", new { id=item.idsach }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.idsach })
+        </td>
+    </tr>
+}
+
+</table>

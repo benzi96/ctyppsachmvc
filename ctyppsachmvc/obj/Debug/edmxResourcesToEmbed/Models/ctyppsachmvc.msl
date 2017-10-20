@@ -1,0 +1,159 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ctyppsachModelStoreContainer" CdmEntityContainer="ctyppsachEntities">
+    <EntitySetMapping Name="congnotheothoigian">
+      <EntityTypeMapping TypeName="ctyppsachModel.congnotheothoigian">
+        <MappingFragment StoreEntitySet="congnotheothoigian">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="iddl" ColumnName="iddl" />
+          <ScalarProperty Name="congno" ColumnName="congno" />
+          <ScalarProperty Name="thoidiem" ColumnName="thoidiem" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ctdmsdb">
+      <EntityTypeMapping TypeName="ctyppsachModel.ctdmsdb">
+        <MappingFragment StoreEntitySet="ctdmsdb">
+          <ScalarProperty Name="idctdmsdb" ColumnName="idctdmsdb" />
+          <ScalarProperty Name="iddmsdb" ColumnName="iddmsdb" />
+          <ScalarProperty Name="idsach" ColumnName="idsach" />
+          <ScalarProperty Name="soluong" ColumnName="soluong" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ctpn">
+      <EntityTypeMapping TypeName="ctyppsachModel.ctpn">
+        <MappingFragment StoreEntitySet="ctpn">
+          <ScalarProperty Name="idpn" ColumnName="idpn" />
+          <ScalarProperty Name="idctpn" ColumnName="idctpn" />
+          <ScalarProperty Name="idsach" ColumnName="idsach" />
+          <ScalarProperty Name="soluong" ColumnName="soluong" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ctpx">
+      <EntityTypeMapping TypeName="ctyppsachModel.ctpx">
+        <MappingFragment StoreEntitySet="ctpx">
+          <ScalarProperty Name="idpx" ColumnName="idpx" />
+          <ScalarProperty Name="idctpx" ColumnName="idctpx" />
+          <ScalarProperty Name="idsach" ColumnName="idsach" />
+          <ScalarProperty Name="soluong" ColumnName="soluong" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="daily">
+      <EntityTypeMapping TypeName="ctyppsachModel.daily">
+        <MappingFragment StoreEntitySet="daily">
+          <ScalarProperty Name="iddl" ColumnName="iddl" />
+          <ScalarProperty Name="tendl" ColumnName="tendl" />
+          <ScalarProperty Name="diachi" ColumnName="diachi" />
+          <ScalarProperty Name="sodt" ColumnName="sodt" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="danhmucsachdaban">
+      <EntityTypeMapping TypeName="ctyppsachModel.danhmucsachdaban">
+        <MappingFragment StoreEntitySet="danhmucsachdaban">
+          <ScalarProperty Name="iddmsdb" ColumnName="iddmsdb" />
+          <ScalarProperty Name="iddl" ColumnName="iddl" />
+          <ScalarProperty Name="thoigian" ColumnName="thoigian" />
+          <ScalarProperty Name="sotiendathanhtoan" ColumnName="sotiendathanhtoan" />
+          <ScalarProperty Name="sotienconno" ColumnName="sotienconno" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="hangtoncuadaily">
+      <EntityTypeMapping TypeName="ctyppsachModel.hangtoncuadaily">
+        <MappingFragment StoreEntitySet="hangtoncuadaily">
+          <ScalarProperty Name="idht" ColumnName="idht" />
+          <ScalarProperty Name="iddl" ColumnName="iddl" />
+          <ScalarProperty Name="idsach" ColumnName="idsach" />
+          <ScalarProperty Name="soluongchuaban" ColumnName="soluongchuaban" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="linhvuc">
+      <EntityTypeMapping TypeName="ctyppsachModel.linhvuc">
+        <MappingFragment StoreEntitySet="linhvuc">
+          <ScalarProperty Name="idlv" ColumnName="idlv" />
+          <ScalarProperty Name="tenlv" ColumnName="tenlv" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="nxb">
+      <EntityTypeMapping TypeName="ctyppsachModel.nxb">
+        <MappingFragment StoreEntitySet="nxb">
+          <ScalarProperty Name="idnxb" ColumnName="idnxb" />
+          <ScalarProperty Name="tennxb" ColumnName="tennxb" />
+          <ScalarProperty Name="diachi" ColumnName="diachi" />
+          <ScalarProperty Name="sodt" ColumnName="sodt" />
+          <ScalarProperty Name="sotk" ColumnName="sotk" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="phieunhap">
+      <EntityTypeMapping TypeName="ctyppsachModel.phieunhap">
+        <MappingFragment StoreEntitySet="phieunhap">
+          <ScalarProperty Name="idpn" ColumnName="idpn" />
+          <ScalarProperty Name="idnxb" ColumnName="idnxb" />
+          <ScalarProperty Name="nguoigiaosach" ColumnName="nguoigiaosach" />
+          <ScalarProperty Name="ngaynhap" ColumnName="ngaynhap" />
+          <ScalarProperty Name="nguoivietphieu" ColumnName="nguoivietphieu" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="phieutratien">
+      <EntityTypeMapping TypeName="ctyppsachModel.phieutratien">
+        <MappingFragment StoreEntitySet="phieutratien">
+          <ScalarProperty Name="idptt" ColumnName="idptt" />
+          <ScalarProperty Name="idnxb" ColumnName="idnxb" />
+          <ScalarProperty Name="sotientra" ColumnName="sotientra" />
+          <ScalarProperty Name="tinhtrang" ColumnName="tinhtrang" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="phieuxuat">
+      <EntityTypeMapping TypeName="ctyppsachModel.phieuxuat">
+        <MappingFragment StoreEntitySet="phieuxuat">
+          <ScalarProperty Name="idpx" ColumnName="idpx" />
+          <ScalarProperty Name="iddl" ColumnName="iddl" />
+          <ScalarProperty Name="nguoinhan" ColumnName="nguoinhan" />
+          <ScalarProperty Name="ngayxuat" ColumnName="ngayxuat" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sach">
+      <EntityTypeMapping TypeName="ctyppsachModel.sach">
+        <MappingFragment StoreEntitySet="sach">
+          <ScalarProperty Name="idsach" ColumnName="idsach" />
+          <ScalarProperty Name="tensach" ColumnName="tensach" />
+          <ScalarProperty Name="tacgia" ColumnName="tacgia" />
+          <ScalarProperty Name="idnxb" ColumnName="idnxb" />
+          <ScalarProperty Name="idlv" ColumnName="idlv" />
+          <ScalarProperty Name="giaxuat" ColumnName="giaxuat" />
+          <ScalarProperty Name="gianhap" ColumnName="gianhap" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sotienphaitrachonxb">
+      <EntityTypeMapping TypeName="ctyppsachModel.sotienphaitrachonxb">
+        <MappingFragment StoreEntitySet="sotienphaitrachonxb">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="idnxb" ColumnName="idnxb" />
+          <ScalarProperty Name="sotienphaitra" ColumnName="sotienphaitra" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tonkho">
+      <EntityTypeMapping TypeName="ctyppsachModel.tonkho">
+        <MappingFragment StoreEntitySet="tonkho">
+          <ScalarProperty Name="idtk" ColumnName="idtk" />
+          <ScalarProperty Name="idsach" ColumnName="idsach" />
+          <ScalarProperty Name="thoidiem" ColumnName="thoidiem" />
+          <ScalarProperty Name="soluongton" ColumnName="soluongton" />
+          <ScalarProperty Name="idphieu" ColumnName="idphieu" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
