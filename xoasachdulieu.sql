@@ -1,0 +1,15 @@
+﻿delete from ctdmsdb
+delete from ctpn
+delete from ctpx
+delete from congnotheothoigian
+delete from sotienphaitrachonxb
+delete from tonkho
+delete from danhmucsachdaban
+delete from phieunhap
+delete from phieuxuat
+delete from phieutratien
+delete from hangtoncuadaily
+delete from nxb
+delete from daily
+delete from sach
+delete from linhvuc
