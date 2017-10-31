@@ -22,19 +22,22 @@ namespace ctyppsachmvc.Controllers
 
             if (DateTime.TryParse(thoidiem, out searchDate))
             {
-                List<tonkho> tks = new List<tonkho>();
-                DateTime tomorrowdate = searchDate.AddDays(1);
-                var tonkhoes = db.tonkho.Include(c => c.sach)
-                    .OrderByDescending(o => o.idtk)
-                    .FirstOrDefault(h => h.thoidiem <= tomorrowdate);
+                List<sach> sach = new List<sach>();
+                var ctpn = db.ctpn.Where(ct => ct.idsach == idsach && ct.phieunhap.ngaynhap > searchDate);
+                int soluongnhap = (int)ctpn.Sum(ct => ct.soluong);
+                var ctpx = db.ctpx.Where(ct => ct.idsach == idsach && ct.phieuxuat.ngayxuat > searchDate);
+                int soluongxuat = (int)ctpx.Sum(ct => ct.soluong);
+                int soluongtonhientai = (int)db.sach.Find(idsach).soluongton;
+                int soluongtonquakhu = soluongtonhientai + soluongxuat - soluongnhap;
 
-                tks.Add(tonkhoes);
-                return View(tks);
+                sach a = db.sach.Find(idsach);
+                sach.Add(a);
+                return View(sach);
                 // do not use .Equals() which can not be converted to SQL
             }
 
-            var sach = db.sach.Include(t => t.nxb);
-            return View(sach.ToList());
+            var s = db.sach.Include(t => t.nxb);
+            return View(s.ToList());
         }
 
         protected override void Dispose(bool disposing)
