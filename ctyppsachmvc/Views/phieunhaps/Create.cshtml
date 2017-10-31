@@ -13,7 +13,7 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>phieunhap</h4>
+        <h4>Phiếu nhập</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
@@ -25,7 +25,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.phieunhap.nguoigiaosach, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.phieunhap.nguoigiaosach, "Người giao sách", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.phieunhap.nguoigiaosach, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.phieunhap.nguoigiaosach, "", new { @class = "text-danger" })
@@ -33,15 +33,15 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.phieunhap.ngaynhap, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.phieunhap.ngaynhap, "Ngày nhập", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.phieunhap.ngaynhap, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.phieunhap.ngaynhap, new { htmlAttributes = new { @class = "form-control datepicker", autocomplete = "off" } })
                 @Html.ValidationMessageFor(model => model.phieunhap.ngaynhap, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.phieunhap.nguoivietphieu, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.phieunhap.nguoivietphieu,"Người viết phiếu", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.phieunhap.nguoivietphieu, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.phieunhap.nguoivietphieu, "", new { @class = "text-danger" })
@@ -73,12 +73,28 @@
     <hr />
     <table class="table" id="chitiet">
         <tr>
-            <td>ID</td>
-            <td>ID Sách</td>
-            <td>Tên Sách</td>
-            <td>Số lượng nhập</td>
-            <td></td>
+            <th>ID</th>
+            <th>ID Sách</th>
+            <th>Tên Sách</th>
+            <th>Số lượng nhập</th>
+            <th></th>
         </tr>
+       @if (Model != null)
+       {
+            foreach (var ct in Model.phieunhap.ctpn)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => ct.idctpn)</td>
+                    <td>@Html.DisplayFor(modelItem => ct.idsach)</td>
+                    <td>@Html.DisplayFor(modelItem => ct.sach.tensach)</td>
+                    <td>@Html.DisplayFor(modelItem => ct.soluong)</td>
+                    <td><button class="btn btn-danger btnDelete">Delete</button></td>
+                    @Html.Hidden("ct.Index", ct.idctpn)
+                    @Html.Hidden("ct[" + ct.idctpn + "].idsach", ct.idsach)
+                    @Html.Hidden("ct[" + ct.idctpn + "].soluong", ct.soluong)
+                </tr>
+            }
+       }
     </table>
     <hr />
     <div class="form-group">
@@ -94,5 +110,6 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jqueryui")
     @Scripts.Render("~/bundles/mycustomjquery")
 }

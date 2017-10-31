@@ -15,10 +15,11 @@ namespace ctyppsachmvc.Controllers
         private ctyppsachEntities db = new ctyppsachEntities();
 
         // GET: tonkhoes
-        public ActionResult Index(string thoidiem)
+        public ActionResult Index(string thoidiem, int idsach)
         {
 
             DateTime searchDate;
+
             if (DateTime.TryParse(thoidiem, out searchDate))
             {
                 List<tonkho> tks = new List<tonkho>();
@@ -32,8 +33,8 @@ namespace ctyppsachmvc.Controllers
                 // do not use .Equals() which can not be converted to SQL
             }
 
-            var tonkho = db.tonkho.Include(t => t.sach);
-            return View(tonkho.ToList());
+            var sach = db.sach.Include(t => t.nxb);
+            return View(sach.ToList());
         }
 
         protected override void Dispose(bool disposing)

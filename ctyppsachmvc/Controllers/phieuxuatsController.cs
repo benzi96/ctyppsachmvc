@@ -69,7 +69,7 @@ namespace ctyppsachmvc.Controllers
                     tk.thoidiem = DateTime.Now;
                     tonkho tkht = db.tonkho.OrderByDescending(o => o.idtk).FirstOrDefault(o => o.idsach == (int)ct.idsach);
                     //kiem tra xem cuon sach du so luong de xuat ko
-                    if (tkht != null && tkht.soluongton < ct.soluong)
+                    if (tkht != null && tkht.soluongton > ct.soluong)
                     {
                         tk.idsach = (int)ct.idsach;
                         tk.soluongton = tkht.soluongton - ct.soluong;
@@ -80,7 +80,7 @@ namespace ctyppsachmvc.Controllers
                         ModelState.AddModelError("", "Không đủ số lượng hoặc chưa nhập sách về");
                         ViewBag.iddl = new SelectList(db.daily, "iddl", "tendl", phieuxuat.iddl);
                         ViewBag.idsach = new SelectList(db.sach, "idsach", "tensach");
-                        return View(phieuxuat);
+                        return View();
                     }
 
                     //cap nhat so sach da gui cho dai ly
@@ -96,6 +96,7 @@ namespace ctyppsachmvc.Controllers
                         htdl.iddl = phieuxuat.iddl;
                         htdl.idsach = ct.idsach;
                         htdl.soluongchuaban = ct.soluong;
+                        db.hangtoncuadaily.Add(htdl);
                     }
                 }
                 phieuxuat.ctpx = ctpx;

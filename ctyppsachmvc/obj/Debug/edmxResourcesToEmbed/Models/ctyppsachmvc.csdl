@@ -155,6 +155,7 @@
     <NavigationProperty Name="linhvuc" Relationship="Self.FK__sach__idlv__0C85DE4D" FromRole="sach" ToRole="linhvuc" />
     <NavigationProperty Name="nxb" Relationship="Self.FK__sach__idnxb__0B91BA14" FromRole="sach" ToRole="nxb" />
     <NavigationProperty Name="tonkho" Relationship="Self.FK__tonkho__idsach__08B54D69" FromRole="sach" ToRole="tonkho" />
+    <Property Name="soluongton" Type="Int32" />
   </EntityType>
   <EntityType Name="sotienphaitrachonxb">
     <Key>
@@ -164,6 +165,7 @@
     <Property Name="idnxb" Type="Int32" />
     <Property Name="sotienphaitra" Type="Decimal" Precision="10" Scale="1" />
     <NavigationProperty Name="nxb" Relationship="Self.FK__sotienpha__idnxb__4BAC3F29" FromRole="sotienphaitrachonxb" ToRole="nxb" />
+    <Property Name="thoidiem" Type="DateTime" Precision="3" />
   </EntityType>
   <EntityType Name="tonkho">
     <Key>

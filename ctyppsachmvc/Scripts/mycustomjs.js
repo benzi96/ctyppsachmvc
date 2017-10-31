@@ -5,7 +5,6 @@
     //event handler for Add button
 $('#btnAdd').click(function () {
     dynamicId += 1
-
     $('#chitiet').append(
         "<tr>" +
         "<td>" + dynamicId + "</td>" +

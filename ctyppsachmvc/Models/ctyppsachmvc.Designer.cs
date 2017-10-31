@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Users\pc\Documents\Visual Studio 2017\Projects\ctyppsachmvc\ctyppsachmvc\Models\ctyppsachmvc.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\pc\Documents\GitHub\ctyppsachmvc\ctyppsachmvc\Models\ctyppsachmvc.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

@@ -16,7 +16,7 @@
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
-            @Html.LabelFor(model => model.danhmucsachdaban.iddl, "iddl", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.Label("ID Đại lý", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("danhmucsachdaban.iddl", ViewBag.iddl as SelectList, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.danhmucsachdaban.iddl, "", new { @class = "text-danger" })
@@ -24,7 +24,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.danhmucsachdaban.thoigian, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.Label("Thời gian", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.danhmucsachdaban.thoigian, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.danhmucsachdaban.thoigian, "", new { @class = "text-danger" })
@@ -32,7 +32,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.danhmucsachdaban.sotiendathanhtoan, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.Label("Số tiền đã thanh toán", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.danhmucsachdaban.sotiendathanhtoan, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.danhmucsachdaban.sotiendathanhtoan, "", new { @class = "text-danger" })
@@ -40,7 +40,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.danhmucsachdaban.sotienconno, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.Label("Số tiền còn nợ", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.danhmucsachdaban.sotienconno, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.danhmucsachdaban.sotienconno, "", new { @class = "text-danger" })
@@ -55,9 +55,10 @@
             @Html.LabelFor(model => model.ctdmsdb.idsach, "Tên sách")
             <div class="form-group">
                 @Html.DropDownList("idsach", null, htmlAttributes: new { @class = "form-control", @id = "item" })
+                @Html.ValidationMessageFor(model => model.ctdmsdb.idsach, "", new { @class = "text-danger" })
             </div>
 
-            @Html.LabelFor(model => model.ctdmsdb.soluong, "Số lượng đã bán")
+            @Html.LabelFor(model => model.ctdmsdb.soluong, "Số lượng")
             <div class="form-group">
                 @Html.EditorFor(model => model.ctdmsdb.soluong, new { htmlAttributes = new { @class = "form-control", @id = "amount" } })
                 @Html.ValidationMessageFor(model => model.ctdmsdb.soluong, "", new { @class = "text-danger" })
@@ -78,10 +79,8 @@
         </table>
         <hr />
         <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Create" class="btn btn-default" />
             </div>
-        </div>
     </div>
 }
 
@@ -91,4 +90,5 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/mycustomjquery")
 }

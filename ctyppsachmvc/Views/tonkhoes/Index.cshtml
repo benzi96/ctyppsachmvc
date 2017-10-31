@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ctyppsachmvc.Models.tonkho>
+﻿@model IEnumerable<ctyppsachmvc.Models.sach>
 
 @{
     ViewBag.Title = "Index";
@@ -12,6 +12,10 @@
         <div class="form-group input-group-sm">
             @Html.TextBox("thoidiem", null, new { @class = "form-control datepicker", placeholder = "Enter Drop-off date here...", autocomplete = "off" })
         </div>
+        @Html.Label("Tên sách")
+        <div class="form-group">
+            @Html.DropDownList("idsach", null, htmlAttributes: new { @class = "form-control", @id = "item" })
+        </div>
         @*<input type="date" class="form-control"/>*@
         <div class="form-group">
             <div>
@@ -24,32 +28,33 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.thoidiem)
+            @Html.DisplayName("Tên sách")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.soluongton)
+           @Html.DisplayName("Tác giả")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.idphieu)
+            @Html.DisplayName("Nhà xuất bản")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.sach.tensach)
+            @Html.DisplayName("Số lượng tồn")
+            
         </th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.thoidiem)
+            @Html.DisplayFor(modelItem => item.tensach)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tacgia)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.nxb.tennxb)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.soluongton)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.idphieu)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.sach.tensach)
         </td>
     </tr>
 }

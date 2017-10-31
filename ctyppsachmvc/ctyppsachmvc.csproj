@@ -149,12 +149,14 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\congnotheothoigiansController.cs" />
     <Compile Include="Controllers\danhmucsachdabansController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\nxbsController.cs" />
     <Compile Include="Controllers\phieunhapsController.cs" />
     <Compile Include="Controllers\phieuxuatsController.cs" />
     <Compile Include="Controllers\sachesController.cs" />
+    <Compile Include="Controllers\sotienphaitrachonxbsController.cs" />
     <Compile Include="Controllers\tonkhoesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -309,7 +311,9 @@
     <Content Include="Scripts\mycustomjs.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -349,6 +353,16 @@
     <Content Include="Views\nxbs\Edit.cshtml" />
     <Content Include="Views\nxbs\Index.cshtml" />
     <Content Include="Views\tonkhoes\Index.cshtml" />
+    <Content Include="Views\congnotheothoigians\Create.cshtml" />
+    <Content Include="Views\congnotheothoigians\Delete.cshtml" />
+    <Content Include="Views\congnotheothoigians\Details.cshtml" />
+    <Content Include="Views\congnotheothoigians\Edit.cshtml" />
+    <Content Include="Views\congnotheothoigians\Index.cshtml" />
+    <Content Include="Views\sotienphaitrachonxbs\Create.cshtml" />
+    <Content Include="Views\sotienphaitrachonxbs\Delete.cshtml" />
+    <Content Include="Views\sotienphaitrachonxbs\Details.cshtml" />
+    <Content Include="Views\sotienphaitrachonxbs\Edit.cshtml" />
+    <Content Include="Views\sotienphaitrachonxbs\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -386,7 +400,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>64759</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:64759/</IISUrl>
+          <IISUrl>http://localhost:33146/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

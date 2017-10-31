@@ -31,6 +31,7 @@ namespace ctyppsachmvc.Models
         public Nullable<int> idlv { get; set; }
         public Nullable<decimal> giaxuat { get; set; }
         public Nullable<decimal> gianhap { get; set; }
+        public Nullable<int> soluongton { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ctdmsdb> ctdmsdb { get; set; }

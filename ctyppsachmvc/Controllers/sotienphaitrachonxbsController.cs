@@ -10,112 +10,112 @@ using ctyppsachmvc.Models;
 
 namespace ctyppsachmvc.Controllers
 {
-    public class nxbsController : Controller
+    public class sotienphaitrachonxbsController : Controller
     {
         private ctyppsachEntities db = new ctyppsachEntities();
 
-        // GET: nxbs
+        // GET: sotienphaitrachonxbs
         public ActionResult Index()
         {
-            return View(db.nxb.ToList());
+            var sotienphaitrachonxb = db.sotienphaitrachonxb.Include(s => s.nxb);
+            return View(sotienphaitrachonxb.ToList());
         }
 
-        // GET: nxbs/Details/5
+        // GET: sotienphaitrachonxbs/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            nxb nxb = db.nxb.Find(id);
-            if (nxb == null)
+            sotienphaitrachonxb sotienphaitrachonxb = db.sotienphaitrachonxb.Find(id);
+            if (sotienphaitrachonxb == null)
             {
                 return HttpNotFound();
             }
-            return View(nxb);
+            return View(sotienphaitrachonxb);
         }
 
-        // GET: nxbs/Create
+        // GET: sotienphaitrachonxbs/Create
         public ActionResult Create()
         {
+            ViewBag.idnxb = new SelectList(db.nxb, "idnxb", "tennxb");
             return View();
         }
 
-        // POST: nxbs/Create
+        // POST: sotienphaitrachonxbs/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "idnxb,tennxb,diachi,sodt,sotk")] nxb nxb)
+        public ActionResult Create([Bind(Include = "id,idnxb,sotienphaitra")] sotienphaitrachonxb sotienphaitrachonxb)
         {
             if (ModelState.IsValid)
             {
-                db.nxb.Add(nxb);
-                db.SaveChanges();
-                sotienphaitrachonxb sotien = new sotienphaitrachonxb();
-                sotien.idnxb = nxb.idnxb;
-                sotien.sotienphaitra = 0;
-                db.sotienphaitrachonxb.Add(sotien);
+                db.sotienphaitrachonxb.Add(sotienphaitrachonxb);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(nxb);
+            ViewBag.idnxb = new SelectList(db.nxb, "idnxb", "tennxb", sotienphaitrachonxb.idnxb);
+            return View(sotienphaitrachonxb);
         }
 
-        // GET: nxbs/Edit/5
+        // GET: sotienphaitrachonxbs/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            nxb nxb = db.nxb.Find(id);
-            if (nxb == null)
+            sotienphaitrachonxb sotienphaitrachonxb = db.sotienphaitrachonxb.Find(id);
+            if (sotienphaitrachonxb == null)
             {
                 return HttpNotFound();
             }
-            return View(nxb);
+            ViewBag.idnxb = new SelectList(db.nxb, "idnxb", "tennxb", sotienphaitrachonxb.idnxb);
+            return View(sotienphaitrachonxb);
         }
 
-        // POST: nxbs/Edit/5
+        // POST: sotienphaitrachonxbs/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "idnxb,tennxb,diachi,sodt,sotk")] nxb nxb)
+        public ActionResult Edit([Bind(Include = "id,idnxb,sotienphaitra")] sotienphaitrachonxb sotienphaitrachonxb)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(nxb).State = EntityState.Modified;
+                db.Entry(sotienphaitrachonxb).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(nxb);
+            ViewBag.idnxb = new SelectList(db.nxb, "idnxb", "tennxb", sotienphaitrachonxb.idnxb);
+            return View(sotienphaitrachonxb);
         }
 
-        // GET: nxbs/Delete/5
+        // GET: sotienphaitrachonxbs/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            nxb nxb = db.nxb.Find(id);
-            if (nxb == null)
+            sotienphaitrachonxb sotienphaitrachonxb = db.sotienphaitrachonxb.Find(id);
+            if (sotienphaitrachonxb == null)
             {
                 return HttpNotFound();
             }
-            return View(nxb);
+            return View(sotienphaitrachonxb);
         }
 
-        // POST: nxbs/Delete/5
+        // POST: sotienphaitrachonxbs/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            nxb nxb = db.nxb.Find(id);
-            db.nxb.Remove(nxb);
+            sotienphaitrachonxb sotienphaitrachonxb = db.sotienphaitrachonxb.Find(id);
+            db.sotienphaitrachonxb.Remove(sotienphaitrachonxb);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

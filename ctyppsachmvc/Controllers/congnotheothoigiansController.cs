@@ -10,112 +10,112 @@ using ctyppsachmvc.Models;
 
 namespace ctyppsachmvc.Controllers
 {
-    public class nxbsController : Controller
+    public class congnotheothoigiansController : Controller
     {
         private ctyppsachEntities db = new ctyppsachEntities();
 
-        // GET: nxbs
+        // GET: congnotheothoigians
         public ActionResult Index()
         {
-            return View(db.nxb.ToList());
+            var congnotheothoigian = db.congnotheothoigian.Include(c => c.daily);
+            return View(congnotheothoigian.ToList());
         }
 
-        // GET: nxbs/Details/5
+        // GET: congnotheothoigians/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            nxb nxb = db.nxb.Find(id);
-            if (nxb == null)
+            congnotheothoigian congnotheothoigian = db.congnotheothoigian.Find(id);
+            if (congnotheothoigian == null)
             {
                 return HttpNotFound();
             }
-            return View(nxb);
+            return View(congnotheothoigian);
         }
 
-        // GET: nxbs/Create
+        // GET: congnotheothoigians/Create
         public ActionResult Create()
         {
+            ViewBag.iddl = new SelectList(db.daily, "iddl", "tendl");
             return View();
         }
 
-        // POST: nxbs/Create
+        // POST: congnotheothoigians/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "idnxb,tennxb,diachi,sodt,sotk")] nxb nxb)
+        public ActionResult Create([Bind(Include = "id,iddl,congno,thoidiem")] congnotheothoigian congnotheothoigian)
         {
             if (ModelState.IsValid)
             {
-                db.nxb.Add(nxb);
-                db.SaveChanges();
-                sotienphaitrachonxb sotien = new sotienphaitrachonxb();
-                sotien.idnxb = nxb.idnxb;
-                sotien.sotienphaitra = 0;
-                db.sotienphaitrachonxb.Add(sotien);
+                db.congnotheothoigian.Add(congnotheothoigian);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(nxb);
+            ViewBag.iddl = new SelectList(db.daily, "iddl", "tendl", congnotheothoigian.iddl);
+            return View(congnotheothoigian);
         }
 
-        // GET: nxbs/Edit/5
+        // GET: congnotheothoigians/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            nxb nxb = db.nxb.Find(id);
-            if (nxb == null)
+            congnotheothoigian congnotheothoigian = db.congnotheothoigian.Find(id);
+            if (congnotheothoigian == null)
             {
                 return HttpNotFound();
             }
-            return View(nxb);
+            ViewBag.iddl = new SelectList(db.daily, "iddl", "tendl", congnotheothoigian.iddl);
+            return View(congnotheothoigian);
         }
 
-        // POST: nxbs/Edit/5
+        // POST: congnotheothoigians/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "idnxb,tennxb,diachi,sodt,sotk")] nxb nxb)
+        public ActionResult Edit([Bind(Include = "id,iddl,congno,thoidiem")] congnotheothoigian congnotheothoigian)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(nxb).State = EntityState.Modified;
+                db.Entry(congnotheothoigian).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(nxb);
+            ViewBag.iddl = new SelectList(db.daily, "iddl", "tendl", congnotheothoigian.iddl);
+            return View(congnotheothoigian);
         }
 
-        // GET: nxbs/Delete/5
+        // GET: congnotheothoigians/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            nxb nxb = db.nxb.Find(id);
-            if (nxb == null)
+            congnotheothoigian congnotheothoigian = db.congnotheothoigian.Find(id);
+            if (congnotheothoigian == null)
             {
                 return HttpNotFound();
             }
-            return View(nxb);
+            return View(congnotheothoigian);
         }
 
-        // POST: nxbs/Delete/5
+        // POST: congnotheothoigians/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            nxb nxb = db.nxb.Find(id);
-            db.nxb.Remove(nxb);
+            congnotheothoigian congnotheothoigian = db.congnotheothoigian.Find(id);
+            db.congnotheothoigian.Remove(congnotheothoigian);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

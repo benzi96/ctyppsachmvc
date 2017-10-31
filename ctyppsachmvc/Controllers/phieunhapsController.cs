@@ -63,23 +63,9 @@ namespace ctyppsachmvc.Controllers
                     ct.idpn = idpn;
                     ct.idctpn = idct;
                     idct++;
-                    tonkho tk = new tonkho();
-                    tk.thoidiem = DateTime.Now;
-
-                    //lấy tồn kho mới nhất của sách này
-                    tonkho tkht = db.tonkho.OrderByDescending(o => o.idtk).FirstOrDefault(o => o.idsach == (int)ct.idsach);
-                    
-                    if (tkht != null)
-                    {
-                        tk.idsach = (int)ct.idsach;
-                        tk.soluongton = tkht.soluongton + ct.soluong;
-                    }
-                    else
-                    {
-                        tk.idsach = (int)ct.idsach;
-                        tk.soluongton = ct.soluong;
-                    }
-                    db.tonkho.Add(tk);
+                    sach s = db.sach.Find(ct.idsach);
+                    if (s.soluongton != null) s.soluongton = s.soluongton + ct.soluong;
+                    else s.soluongton = ct.soluong;
                 }
                 phieunhap.ctpn = ctpn;
                 db.phieunhap.Add(phieunhap);
@@ -88,7 +74,11 @@ namespace ctyppsachmvc.Controllers
             }
 
             ViewBag.idnxb = new SelectList(db.nxb, "idnxb", "tennxb", phieunhap.idnxb);
-            return View(phieunhap);
+            ViewBag.idsach = new SelectList(db.sach, "idsach", "tensach");
+            phieunhap.ctpn = ctpn;
+            phieunhapviewmodel pnvm = new phieunhapviewmodel();
+            pnvm.phieunhap = phieunhap;
+            return View(pnvm);
         }
 
         // GET: phieunhaps/Edit/5
@@ -103,8 +93,11 @@ namespace ctyppsachmvc.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.idsach = new SelectList(db.sach, "idsach", "tensach");
             ViewBag.idnxb = new SelectList(db.nxb, "idnxb", "tennxb", phieunhap.idnxb);
-            return View(phieunhap);
+            phieunhapviewmodel pnvm = new phieunhapviewmodel();
+            pnvm.phieunhap = phieunhap;
+            return View(pnvm);
         }
 
         // POST: phieunhaps/Edit/5
@@ -112,43 +105,83 @@ namespace ctyppsachmvc.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "idpn,idnxb,nguoigiaosach,ngaynhap,nguoivietphieu")] phieunhap phieunhap)
+        public ActionResult Edit([Bind(Prefix = "phieunhap")] phieunhap phieunhap,
+                                 [Bind(Prefix = "ct")] ctpn[] ctpn)
         {
             if (ModelState.IsValid)
             {
+                int idpn = phieunhap.idpn;
+                int idct = 1;
+
+                //thêm chi tiết sửa vào database
+                foreach (ctpn ct in ctpn)
+                {
+                    ct.idpn = idpn;
+                    ct.idctpn = idct;
+                    idct++;
+                    sach s = db.sach.Find(ct.idsach);
+                    if (s.soluongton != null) s.soluongton = s.soluongton + ct.soluong;
+                    else s.soluongton = ct.soluong;
+                }
+
+                //xóa chi tiết cũ trong database
+                var ctpncu = db.ctpn.Where(ct => ct.idpn == phieunhap.idpn).ToList();
+                foreach(var ct in ctpncu)
+                {
+                    sach s = db.sach.Find(ct.idsach);
+                    int soluonghientai = (int)(s.soluongton - ct.soluong);
+                    if (soluonghientai < 0)
+                    {
+                        ViewBag.idsach = new SelectList(db.sach, "idsach", "tensach");
+                        ViewBag.idnxb = new SelectList(db.nxb, "idnxb", "tennxb", phieunhap.idnxb);
+                        phieunhapviewmodel pnvm = new phieunhapviewmodel();
+                        pnvm.phieunhap = phieunhap;
+                        return View(pnvm);
+                    }
+                    s.soluongton = soluonghientai;
+                    db.ctpn.Remove(ct);
+                }
+                foreach (ctpn ct in ctpn)
+                {
+                    db.ctpn.Add(ct);
+                }
                 db.Entry(phieunhap).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.idsach = new SelectList(db.sach, "idsach", "tensach");
             ViewBag.idnxb = new SelectList(db.nxb, "idnxb", "tennxb", phieunhap.idnxb);
-            return View(phieunhap);
+            phieunhapviewmodel pnvm1 = new phieunhapviewmodel();
+            pnvm1.phieunhap = phieunhap;
+            return View(pnvm1);
         }
+        /* delele
+        //// GET: phieunhaps/Delete/5
+        //public ActionResult Delete(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    phieunhap phieunhap = db.phieunhap.Find(id);
+        //    if (phieunhap == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(phieunhap);
+        //}
 
-        // GET: phieunhaps/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            phieunhap phieunhap = db.phieunhap.Find(id);
-            if (phieunhap == null)
-            {
-                return HttpNotFound();
-            }
-            return View(phieunhap);
-        }
-
-        // POST: phieunhaps/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            phieunhap phieunhap = db.phieunhap.Find(id);
-            db.phieunhap.Remove(phieunhap);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
+        //// POST: phieunhaps/Delete/5
+        //[HttpPost, ActionName("Delete")]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult DeleteConfirmed(int id)
+        //{
+        //    phieunhap phieunhap = db.phieunhap.Find(id);
+        //    db.phieunhap.Remove(phieunhap);
+        //    db.SaveChanges();
+        //    return RedirectToAction("Index");
+        //}
+        */
 
         protected override void Dispose(bool disposing)
         {

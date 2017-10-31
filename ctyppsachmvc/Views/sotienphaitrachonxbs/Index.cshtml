@@ -1,0 +1,36 @@
+﻿@model IEnumerable<ctyppsachmvc.Models.sotienphaitrachonxb>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Số tiền phải trả cho nhà xuất bản</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("Nhà xuất bản")
+        </th>
+        <th>
+            @Html.DisplayName("Số tiền phải trả")
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.nxb.tennxb)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.sotienphaitra)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id })
+        </td>
+    </tr>
+}
+
+</table>

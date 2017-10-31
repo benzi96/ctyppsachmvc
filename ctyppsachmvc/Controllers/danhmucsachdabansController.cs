@@ -76,7 +76,7 @@ namespace ctyppsachmvc.Controllers
                         ModelState.AddModelError("", "số sách đã bán lớn hơn số sách xuất cho đại lý");
                         ViewBag.iddl = new SelectList(db.daily, "iddl", "tendl", danhmucsachdaban.iddl);
                         ViewBag.idsach = new SelectList(db.sach, "idsach", "tensach");
-                        return View(danhmucsachdaban);
+                        return View();
                     }
                 }
                 db.danhmucsachdaban.Add(danhmucsachdaban);

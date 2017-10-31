@@ -36,6 +36,43 @@
 
     </dl>
 </div>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("Tên sách")
+        </th>
+        <th>
+            @Html.DisplayName("Số lượng nhập")
+        </th>
+        <th></th>
+    </tr>
+
+    @if (Model.ctpx != null)
+    {
+        foreach (var item in Model.ctpx)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.sach.tensach)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.soluong)
+                </td>
+            </tr>
+        }
+    }
+    else
+    {
+        <tr>
+            <td>
+                Không có chi tiết
+            </td>
+        </tr>
+    }
+</table>
+
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.idpx }) |
     @Html.ActionLink("Back to List", "Index")

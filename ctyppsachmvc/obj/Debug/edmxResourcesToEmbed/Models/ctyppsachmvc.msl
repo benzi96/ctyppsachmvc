@@ -125,6 +125,7 @@
     <EntitySetMapping Name="sach">
       <EntityTypeMapping TypeName="ctyppsachModel.sach">
         <MappingFragment StoreEntitySet="sach">
+          <ScalarProperty Name="soluongton" ColumnName="soluongton" />
           <ScalarProperty Name="idsach" ColumnName="idsach" />
           <ScalarProperty Name="tensach" ColumnName="tensach" />
           <ScalarProperty Name="tacgia" ColumnName="tacgia" />
@@ -138,6 +139,7 @@
     <EntitySetMapping Name="sotienphaitrachonxb">
       <EntityTypeMapping TypeName="ctyppsachModel.sotienphaitrachonxb">
         <MappingFragment StoreEntitySet="sotienphaitrachonxb">
+          <ScalarProperty Name="thoidiem" ColumnName="thoidiem" />
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="idnxb" ColumnName="idnxb" />
           <ScalarProperty Name="sotienphaitra" ColumnName="sotienphaitra" />

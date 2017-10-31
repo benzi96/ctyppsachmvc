@@ -123,6 +123,7 @@
     <Property Name="idlv" Type="int" />
     <Property Name="giaxuat" Type="decimal" Precision="10" Scale="0" />
     <Property Name="gianhap" Type="decimal" Precision="10" Scale="0" />
+    <Property Name="soluongton" Type="int" />
   </EntityType>
   <EntityType Name="sotienphaitrachonxb">
     <Key>
@@ -131,6 +132,7 @@
     <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="idnxb" Type="int" />
     <Property Name="sotienphaitra" Type="decimal" Precision="10" Scale="1" />
+    <Property Name="thoidiem" Type="datetime" />
   </EntityType>
   <EntityType Name="tonkho">
     <Key>
