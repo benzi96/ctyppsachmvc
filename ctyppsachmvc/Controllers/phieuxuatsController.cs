@@ -40,7 +40,7 @@ namespace ctyppsachmvc.Controllers
         public ActionResult Create()
         {
             ViewBag.iddl = new SelectList(db.daily, "iddl", "tendl");
-            ViewBag.idsach = new SelectList(db.sach, "idsach", "tensach");
+            ViewBag.idsach = new SelectList(db.sach.Where(s => s.soluongton != null), "idsach", "tensach");
             return View();
         }
 
@@ -54,6 +54,7 @@ namespace ctyppsachmvc.Controllers
         {
             if (ModelState.IsValid)
             {
+                decimal tongtien = 0;
                 int idpx = 1;
                 if (db.phieuxuat.Any())
                     idpx = db.phieuxuat.Max(o => o.idpx) + 1;
@@ -65,30 +66,26 @@ namespace ctyppsachmvc.Controllers
                     idct++;
 
                     //cap nhat ton kho hien tai
-                    tonkho tk = new tonkho();
-                    tk.thoidiem = DateTime.Now;
-                    tonkho tkht = db.tonkho.OrderByDescending(o => o.idtk).FirstOrDefault(o => o.idsach == (int)ct.idsach);
+                    sach a = db.sach.Find(ct.idsach);
+
                     //kiem tra xem cuon sach du so luong de xuat ko
-                    if (tkht != null && tkht.soluongton > ct.soluong)
-                    {
-                        tk.idsach = (int)ct.idsach;
-                        tk.soluongton = tkht.soluongton - ct.soluong;
-                        db.tonkho.Add(tk);
-                    }
+                    if (a.soluongton > ct.soluong) a.soluongton = a.soluongton - ct.soluong;
                     else
                     {
                         ModelState.AddModelError("", "Không đủ số lượng hoặc chưa nhập sách về");
                         ViewBag.iddl = new SelectList(db.daily, "iddl", "tendl", phieuxuat.iddl);
-                        ViewBag.idsach = new SelectList(db.sach, "idsach", "tensach");
-                        return View();
+                        ViewBag.idsach = new SelectList(db.sach.Where(s => s.soluongton != null), "idsach", "tensach");
+                        phieuxuatviewmodel pxvm = new phieuxuatviewmodel();
+                        phieuxuat.ctpx = ctpx;
+                        pxvm.phieuxuat = phieuxuat;
+                        return View(pxvm);
                     }
 
                     //cap nhat so sach da gui cho dai ly
                     hangtoncuadaily htdl = db.hangtoncuadaily.FirstOrDefault(o => o.iddl == phieuxuat.iddl && o.idsach == ct.idsach);
-                    if(htdl != null)
+                    if(htdl != null && htdl.soluongchuaban != null)
                     {
                         htdl.soluongchuaban = htdl.soluongchuaban + ct.soluong;
-                        db.Entry(htdl).State = EntityState.Modified;
                     }
                     else
                     {
@@ -98,7 +95,20 @@ namespace ctyppsachmvc.Controllers
                         htdl.soluongchuaban = ct.soluong;
                         db.hangtoncuadaily.Add(htdl);
                     }
+                    tongtien += (decimal)(ct.soluong * db.sach.Find(ct.idsach).giaxuat);
                 }
+
+                //cap nhat cong no
+                congnotheothoigian cnht = db.congnotheothoigian.OrderByDescending(o => o.thoidiem).FirstOrDefault(o => o.iddl == phieuxuat.iddl);
+                if (tongtien > 2 * cnht.congno) return View();
+                congnotheothoigian cn = new congnotheothoigian();
+                cn.iddl = phieuxuat.iddl;
+                cn.thoidiem = (DateTime)phieuxuat.ngayxuat;
+                if (cnht != null && cnht.congno != null) cn.congno = cnht.congno + tongtien;
+                else cn.congno = tongtien;
+
+                db.congnotheothoigian.Add(cn);
+
                 phieuxuat.ctpx = ctpx;
                 db.phieuxuat.Add(phieuxuat);
                 db.SaveChanges();
@@ -106,7 +116,11 @@ namespace ctyppsachmvc.Controllers
             }
 
             ViewBag.iddl = new SelectList(db.daily, "iddl", "tendl", phieuxuat.iddl);
-            return View(phieuxuat);
+            ViewBag.idsach = new SelectList(db.sach.Where(s => s.soluongton != null), "idsach", "tensach");
+            phieuxuatviewmodel pxvm1 = new phieuxuatviewmodel();
+            phieuxuat.ctpx = ctpx;
+            pxvm1.phieuxuat = phieuxuat;
+            return View(pxvm1);
         }
 
         // GET: phieuxuats/Edit/5
@@ -122,7 +136,10 @@ namespace ctyppsachmvc.Controllers
                 return HttpNotFound();
             }
             ViewBag.iddl = new SelectList(db.daily, "iddl", "tendl", phieuxuat.iddl);
-            return View(phieuxuat);
+            ViewBag.idsach = new SelectList(db.sach.Where(s => s.soluongton != null), "idsach", "tensach");
+            phieuxuatviewmodel pxvm = new phieuxuatviewmodel();
+            pxvm.phieuxuat = phieuxuat;
+            return View(pxvm);
         }
 
         // POST: phieuxuats/Edit/5
@@ -130,7 +147,8 @@ namespace ctyppsachmvc.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "idpx,iddl,nguoinhan,ngayxuat")] phieuxuat phieuxuat)
+        public ActionResult Edit([Bind(Prefix = "phieuxuat")] phieuxuat phieuxuat,
+                                 [Bind(Prefix = "ct")] ctpx[] ctpx)
         {
             if (ModelState.IsValid)
             {
@@ -139,9 +157,14 @@ namespace ctyppsachmvc.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.iddl = new SelectList(db.daily, "iddl", "tendl", phieuxuat.iddl);
-            return View(phieuxuat);
+            ViewBag.idsach = new SelectList(db.sach.Where(s => s.soluongton != null), "idsach", "tensach");
+            phieuxuatviewmodel pxvm1 = new phieuxuatviewmodel();
+            phieuxuat.ctpx = ctpx;
+            pxvm1.phieuxuat = phieuxuat;
+            return View(pxvm1);
         }
 
+        /* delete
         // GET: phieuxuats/Delete/5
         public ActionResult Delete(int? id)
         {
@@ -167,6 +190,7 @@ namespace ctyppsachmvc.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+        */
 
         protected override void Dispose(bool disposing)
         {

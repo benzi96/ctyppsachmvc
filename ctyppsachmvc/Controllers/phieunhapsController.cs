@@ -135,6 +135,7 @@ namespace ctyppsachmvc.Controllers
                         ViewBag.idsach = new SelectList(db.sach, "idsach", "tensach");
                         ViewBag.idnxb = new SelectList(db.nxb, "idnxb", "tennxb", phieunhap.idnxb);
                         phieunhapviewmodel pnvm = new phieunhapviewmodel();
+                        phieunhap.ctpn = ctpn;
                         pnvm.phieunhap = phieunhap;
                         return View(pnvm);
                     }
@@ -152,6 +153,7 @@ namespace ctyppsachmvc.Controllers
             ViewBag.idsach = new SelectList(db.sach, "idsach", "tensach");
             ViewBag.idnxb = new SelectList(db.nxb, "idnxb", "tennxb", phieunhap.idnxb);
             phieunhapviewmodel pnvm1 = new phieunhapviewmodel();
+            phieunhap.ctpn = ctpn;
             pnvm1.phieunhap = phieunhap;
             return View(pnvm1);
         }
