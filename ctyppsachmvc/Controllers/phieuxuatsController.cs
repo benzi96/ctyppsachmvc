@@ -73,12 +73,8 @@ namespace ctyppsachmvc.Controllers
                     else
                     {
                         ModelState.AddModelError("", "Không đủ số lượng hoặc chưa nhập sách về");
-                        ViewBag.iddl = new SelectList(db.daily, "iddl", "tendl", phieuxuat.iddl);
-                        ViewBag.idsach = new SelectList(db.sach.Where(s => s.soluongton != null), "idsach", "tensach");
-                        phieuxuatviewmodel pxvm = new phieuxuatviewmodel();
                         phieuxuat.ctpx = ctpx;
-                        pxvm.phieuxuat = phieuxuat;
-                        return View(pxvm);
+                        return re(phieuxuat);
                     }
 
                     //cap nhat so sach da gui cho dai ly
@@ -99,11 +95,17 @@ namespace ctyppsachmvc.Controllers
                 }
 
                 //cap nhat cong no
-                congnotheothoigian cnht = db.congnotheothoigian.OrderByDescending(o => o.thoidiem).FirstOrDefault(o => o.iddl == phieuxuat.iddl);
-                if (tongtien > 2 * cnht.congno) return View();
                 congnotheothoigian cn = new congnotheothoigian();
                 cn.iddl = phieuxuat.iddl;
                 cn.thoidiem = (DateTime)phieuxuat.ngayxuat;
+
+                congnotheothoigian cnht = db.congnotheothoigian.OrderByDescending(o => o.thoidiem).FirstOrDefault(o => o.iddl == phieuxuat.iddl);
+                if (tongtien > cnht.congno)
+                {
+                    phieuxuat.ctpx = ctpx;
+                    return re(phieuxuat);
+                }
+                
                 if (cnht != null && cnht.congno != null) cn.congno = cnht.congno + tongtien;
                 else cn.congno = tongtien;
 
@@ -115,12 +117,8 @@ namespace ctyppsachmvc.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.iddl = new SelectList(db.daily, "iddl", "tendl", phieuxuat.iddl);
-            ViewBag.idsach = new SelectList(db.sach.Where(s => s.soluongton != null), "idsach", "tensach");
-            phieuxuatviewmodel pxvm1 = new phieuxuatviewmodel();
             phieuxuat.ctpx = ctpx;
-            pxvm1.phieuxuat = phieuxuat;
-            return View(pxvm1);
+            return re(phieuxuat);
         }
 
         // GET: phieuxuats/Edit/5
@@ -135,11 +133,7 @@ namespace ctyppsachmvc.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.iddl = new SelectList(db.daily, "iddl", "tendl", phieuxuat.iddl);
-            ViewBag.idsach = new SelectList(db.sach.Where(s => s.soluongton != null), "idsach", "tensach");
-            phieuxuatviewmodel pxvm = new phieuxuatviewmodel();
-            pxvm.phieuxuat = phieuxuat;
-            return View(pxvm);
+            return re(phieuxuat);
         }
 
         // POST: phieuxuats/Edit/5
@@ -152,16 +146,70 @@ namespace ctyppsachmvc.Controllers
         {
             if (ModelState.IsValid)
             {
+                int idpx = phieuxuat.idpx;
+                int idct = 1;
+
+                //xóa chi tiết cũ trong database table sach
+                //tinh tong tien cu
+                int tongtiencu = 0;
+                var ctpxcu = db.ctpx.Where(ct => ct.idpx == phieuxuat.idpx).ToList();
+                foreach (var ct in ctpxcu)
+                {
+                    sach s = db.sach.Find(ct.idsach);
+                    int soluonghientai = (int)(s.soluongton + ct.soluong);
+                    s.soluongton = soluonghientai;
+                    tongtiencu += (int)(ct.soluong * s.giaxuat);
+                }
+                //thêm chi tiết sửa vào database table hangtoncuadaily
+                foreach (ctpx ct in ctpx)
+                {
+                    ct.idpx = idpx;
+                    ct.idctpx = idct;
+                    idct++;
+                    hangtoncuadaily ht = db.hangtoncuadaily.FirstOrDefault(o => o.iddl == phieuxuat.iddl && o.idsach == ct.idsach);
+                    ht.soluongchuaban = (int)(ht.soluongchuaban + ct.soluong);
+                }
+                //xoa chi tiet cu trong database table hangtoncuadaily
+                foreach (ctpx ct in ctpxcu)
+                {
+                    hangtoncuadaily ht = db.hangtoncuadaily.FirstOrDefault(o => o.iddl == phieuxuat.iddl && o.idsach == ct.idsach);
+                    int hangtondaily = (int)(ht.soluongchuaban - ct.soluong);
+                    if (hangtondaily < 0)
+                    {
+                        ModelState.AddModelError("", "so sach nay da duoc ban" + hangtondaily);
+                        phieuxuat.ctpx = ctpx;
+                        return re(phieuxuat);
+                    }
+                    db.ctpx.Remove(ct);
+                }
+                //tinh tong tien moi
+                int tongtien = 0;
+                //thêm chi tiết sửa vào database table sach
+                foreach (ctpx ct in ctpx)
+                {
+                    sach s = db.sach.Find(ct.idsach);
+                    if (s.soluongton != null) s.soluongton = s.soluongton - ct.soluong;
+                    if (s.soluongton < 0)
+                    {
+                        ModelState.AddModelError("", "so luong hien tai khong du de xuat " + s.soluongton +" vui long kiem tra lai");
+                        phieuxuat.ctpx = ctpx;
+                        return re(phieuxuat);
+                    }
+                    tongtien += (int)(ct.soluong * s.giaxuat);
+                }
+
+                foreach (ctpx ct in ctpx)
+                {
+                    db.ctpx.Add(ct);
+                }
+
+                
                 db.Entry(phieuxuat).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.iddl = new SelectList(db.daily, "iddl", "tendl", phieuxuat.iddl);
-            ViewBag.idsach = new SelectList(db.sach.Where(s => s.soluongton != null), "idsach", "tensach");
-            phieuxuatviewmodel pxvm1 = new phieuxuatviewmodel();
             phieuxuat.ctpx = ctpx;
-            pxvm1.phieuxuat = phieuxuat;
-            return View(pxvm1);
+            return re(phieuxuat);
         }
 
         /* delete
@@ -199,6 +247,15 @@ namespace ctyppsachmvc.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        private ActionResult re(phieuxuat px)
+        {
+            ViewBag.iddl = new SelectList(db.daily, "iddl", "tendl", px.iddl);
+            ViewBag.idsach = new SelectList(db.sach.Where(s => s.soluongton != null), "idsach", "tensach");
+            phieuxuatviewmodel pxvm1 = new phieuxuatviewmodel();
+            pxvm1.phieuxuat = px;
+            return View(pxvm1);
         }
     }
 }

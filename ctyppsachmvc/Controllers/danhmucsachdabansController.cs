@@ -55,9 +55,10 @@ namespace ctyppsachmvc.Controllers
             if (ModelState.IsValid)
             {
                 int iddmsdb = 1;
-                if (db.phieuxuat.Any())
-                    iddmsdb = db.phieuxuat.Max(o => o.idpx) + 1;
+                if (db.danhmucsachdaban.Any())
+                    iddmsdb = db.danhmucsachdaban.Max(o => o.iddmsdb) + 1;
                 int idct = 1;
+                decimal tongtien = 0;
                 foreach (ctdmsdb ct in ctdmsdb)
                 {
                     ct.iddmsdb = iddmsdb;
@@ -78,7 +79,27 @@ namespace ctyppsachmvc.Controllers
                         ViewBag.idsach = new SelectList(db.sach, "idsach", "tensach");
                         return View();
                     }
+                    tongtien += (decimal)(ct.soluong * htdl.sach.giaxuat);
+
+                    //tim nxb cua cuon sach da duoc ban nay
+                    sotienphaitrachonxb st = db.sotienphaitrachonxb.OrderByDescending(o => o.thoidiem).FirstOrDefault(o => o.idnxb == ct.sach.nxb.idnxb);
+                    sotienphaitrachonxb stnew = new sotienphaitrachonxb();
+                    stnew.idnxb = st.idnxb;
+                    stnew.thoidiem = danhmucsachdaban.thoigian;
+                    if (st != null && st.sotienphaitra != null) stnew.sotienphaitra = st.sotienphaitra + ct.soluong * ct.sach.gianhap;
+                    else
+                    stnew.sotienphaitra = (decimal)(ct.soluong*ct.sach.gianhap);
+                    db.sotienphaitrachonxb.Add(stnew);
+
+                    
                 }
+                congnotheothoigian cnht = db.congnotheothoigian.OrderByDescending(o => o.thoidiem).FirstOrDefault(o => o.iddl == danhmucsachdaban.iddl);
+                congnotheothoigian cn = new congnotheothoigian();
+                cn.iddl = danhmucsachdaban.iddl;
+                cn.thoidiem = (DateTime)danhmucsachdaban.thoigian;
+                cn.congno = (decimal)(cnht.congno + tongtien);
+                db.congnotheothoigian.Add(cn);
+
                 db.danhmucsachdaban.Add(danhmucsachdaban);
                 db.SaveChanges();
                 return RedirectToAction("Index");

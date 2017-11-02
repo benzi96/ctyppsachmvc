@@ -68,6 +68,8 @@ namespace ctyppsachmvc.Controllers
                     else s.soluongton = ct.soluong;
                 }
                 phieunhap.ctpn = ctpn;
+                TimeSpan time = DateTime.Now.TimeOfDay;
+                phieunhap.ngaynhap = phieunhap.ngaynhap + time;
                 db.phieunhap.Add(phieunhap);
                 db.SaveChanges();
                 return RedirectToAction("Index");
