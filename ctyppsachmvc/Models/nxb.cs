@@ -28,6 +28,7 @@ namespace ctyppsachmvc.Models
         public string diachi { get; set; }
         public string sodt { get; set; }
         public string sotk { get; set; }
+        public Nullable<decimal> sotienphaitra { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<phieunhap> phieunhap { get; set; }

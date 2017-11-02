@@ -52,6 +52,7 @@
           <Property Name="tendl" Type="nvarchar" MaxLength="50" />
           <Property Name="diachi" Type="nvarchar" MaxLength="50" />
           <Property Name="sodt" Type="nvarchar" MaxLength="15" />
+          <Property Name="congno" Type="decimal" Precision="10" Scale="0" />
         </EntityType>
         <EntityType Name="danhmucsachdaban">
           <Key>
@@ -88,6 +89,7 @@
           <Property Name="diachi" Type="nvarchar" MaxLength="50" />
           <Property Name="sodt" Type="nvarchar" MaxLength="15" />
           <Property Name="sotk" Type="nvarchar" MaxLength="50" />
+          <Property Name="sotienphaitra" Type="decimal" Precision="10" Scale="0" />
         </EntityType>
         <EntityType Name="phieunhap">
           <Key>
@@ -500,6 +502,7 @@
           <NavigationProperty Name="danhmucsachdaban" Relationship="Self.FK__danhmucsac__iddl__44FF419A" FromRole="daily" ToRole="danhmucsachdaban" />
           <NavigationProperty Name="hangtoncuadaily" Relationship="Self.FK__hangtoncua__iddl__3D5E1FD2" FromRole="daily" ToRole="hangtoncuadaily" />
           <NavigationProperty Name="phieuxuat" Relationship="Self.FK__phieuxuat__iddl__33D4B598" FromRole="daily" ToRole="phieuxuat" />
+          <Property Name="congno" Type="Decimal" Precision="10" Scale="0" />
         </EntityType>
         <EntityType Name="danhmucsachdaban">
           <Key>
@@ -545,6 +548,7 @@
           <NavigationProperty Name="phieutratien" Relationship="Self.FK__phieutrat__idnxb__4E88ABD4" FromRole="nxb" ToRole="phieutratien" />
           <NavigationProperty Name="sach" Relationship="Self.FK__sach__idnxb__0B91BA14" FromRole="nxb" ToRole="sach" />
           <NavigationProperty Name="sotienphaitrachonxb" Relationship="Self.FK__sotienpha__idnxb__4BAC3F29" FromRole="nxb" ToRole="sotienphaitrachonxb" />
+          <Property Name="sotienphaitra" Type="Decimal" Precision="10" Scale="0" />
         </EntityType>
         <EntityType Name="phieunhap">
           <Key>
@@ -958,6 +962,7 @@
           <EntitySetMapping Name="daily">
             <EntityTypeMapping TypeName="ctyppsachModel.daily">
               <MappingFragment StoreEntitySet="daily">
+                <ScalarProperty Name="congno" ColumnName="congno" />
                 <ScalarProperty Name="iddl" ColumnName="iddl" />
                 <ScalarProperty Name="tendl" ColumnName="tendl" />
                 <ScalarProperty Name="diachi" ColumnName="diachi" />
@@ -997,6 +1002,7 @@
           <EntitySetMapping Name="nxb">
             <EntityTypeMapping TypeName="ctyppsachModel.nxb">
               <MappingFragment StoreEntitySet="nxb">
+                <ScalarProperty Name="sotienphaitra" ColumnName="sotienphaitra" />
                 <ScalarProperty Name="idnxb" ColumnName="idnxb" />
                 <ScalarProperty Name="tennxb" ColumnName="tennxb" />
                 <ScalarProperty Name="diachi" ColumnName="diachi" />

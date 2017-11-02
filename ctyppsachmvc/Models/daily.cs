@@ -27,6 +27,7 @@ namespace ctyppsachmvc.Models
         public string tendl { get; set; }
         public string diachi { get; set; }
         public string sodt { get; set; }
+        public Nullable<decimal> congno { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<congnotheothoigian> congnotheothoigian { get; set; }

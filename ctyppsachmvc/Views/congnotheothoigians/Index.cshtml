@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ctyppsachmvc.Models.congnotheothoigian>
+﻿@model ctyppsachmvc.Models.dailycongnoviewmodel
 
 @{
     ViewBag.Title = "Index";
@@ -8,33 +8,23 @@
 
 <table class="table">
     <tr>
-        <th>
-            @Html.DisplayName("Thời điểm")
-        </th>
+        <th>Thời điểm</th>
         <th>
             @Html.DisplayName("Đại lý")
         </th>
         <th>
             @Html.DisplayName("Công nợ")
         </th>
-        <th></th>
     </tr>
 
-@foreach (var item in Model) {
+@foreach (var item in Model.daily) {
     <tr>
+        <td>@Html.DisplayFor(o => o.dt)</td>
         <td>
-            @Html.DisplayFor(modelItem => item.thoidiem)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.daily.tendl)
+            @Html.DisplayFor(modelItem => item.tendl)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.congno)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.id })
         </td>
     </tr>
 }

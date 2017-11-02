@@ -44,6 +44,7 @@
     <EntitySetMapping Name="daily">
       <EntityTypeMapping TypeName="ctyppsachModel.daily">
         <MappingFragment StoreEntitySet="daily">
+          <ScalarProperty Name="congno" ColumnName="congno" />
           <ScalarProperty Name="iddl" ColumnName="iddl" />
           <ScalarProperty Name="tendl" ColumnName="tendl" />
           <ScalarProperty Name="diachi" ColumnName="diachi" />
@@ -83,6 +84,7 @@
     <EntitySetMapping Name="nxb">
       <EntityTypeMapping TypeName="ctyppsachModel.nxb">
         <MappingFragment StoreEntitySet="nxb">
+          <ScalarProperty Name="sotienphaitra" ColumnName="sotienphaitra" />
           <ScalarProperty Name="idnxb" ColumnName="idnxb" />
           <ScalarProperty Name="tennxb" ColumnName="tennxb" />
           <ScalarProperty Name="diachi" ColumnName="diachi" />

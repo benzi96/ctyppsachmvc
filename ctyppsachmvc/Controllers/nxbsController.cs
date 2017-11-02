@@ -50,12 +50,8 @@ namespace ctyppsachmvc.Controllers
         {
             if (ModelState.IsValid)
             {
+                nxb.sotienphaitra = 0;
                 db.nxb.Add(nxb);
-                db.SaveChanges();
-                sotienphaitrachonxb sotien = new sotienphaitrachonxb();
-                sotien.idnxb = nxb.idnxb;
-                sotien.sotienphaitra = 0;
-                db.sotienphaitrachonxb.Add(sotien);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

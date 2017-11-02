@@ -1,0 +1,83 @@
+﻿@model ctyppsachmvc.Models.doanhthuviewmodel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+@using (Html.BeginForm("Index", "doanhthu", FormMethod.Get))
+{
+    <div class="form-inline">
+        @Html.Label("Từ ngày")
+        <div class="form-group input-group-sm">
+            @Html.TextBox("startdate", null, new { @class = "form-control datepicker", placeholder = "Enter Drop-off date here...", autocomplete = "off" })
+        </div>
+        @Html.Label("Đến ngày")
+        <div class="form-group input-group-sm">
+            @Html.TextBox("enddate", null, new { @class = "form-control datepicker", placeholder = "Enter Drop-off date here...", autocomplete = "off" })
+        </div>
+        <div class="form-group">
+            <div>
+                <input type="submit" value="Index" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+<table class="table">
+    <tr>
+        <th>
+            Ngày giao dịch
+        </th>
+        <th>
+            Tên sách
+        </th>
+        <th>
+            Số lượng đã bán
+        </th>
+        <th>
+            Thành tiền
+        </th>
+        <th>
+            Số tiền phải trả cho NXB
+        </th>
+        <th>
+            Lợi nhuận
+        </th>
+    </tr>
+
+@foreach (var item in Model.ctdt) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ngaygiaodich)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tensach)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.soluongdaban)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.thanhtien)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.sotienphaitrachonxb)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.loinhuan)
+        </td>
+    </tr>
+}
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>Doanh thu</td>
+        <td>@Html.DisplayFor(o => o.doanhthu)</td>
+    </tr>
+</table>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jqueryui")
+    @Scripts.Render("~/bundles/mycustomjquery")
+}

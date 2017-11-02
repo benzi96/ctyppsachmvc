@@ -95,21 +95,16 @@ namespace ctyppsachmvc.Controllers
                 }
 
                 //cap nhat cong no
-                congnotheothoigian cn = new congnotheothoigian();
-                cn.iddl = phieuxuat.iddl;
-                cn.thoidiem = (DateTime)phieuxuat.ngayxuat;
-
-                congnotheothoigian cnht = db.congnotheothoigian.OrderByDescending(o => o.thoidiem).FirstOrDefault(o => o.iddl == phieuxuat.iddl);
-                if (tongtien > cnht.congno)
+                daily dl = db.daily.Find(phieuxuat.iddl);
+                if (dl.congno > 0 && tongtien > dl.congno)
                 {
+                    ModelState.AddModelError("", "tong tien phieu xuat lon hon cong no hien tai cua dai ly");
                     phieuxuat.ctpx = ctpx;
                     return re(phieuxuat);
                 }
                 
-                if (cnht != null && cnht.congno != null) cn.congno = cnht.congno + tongtien;
-                else cn.congno = tongtien;
-
-                db.congnotheothoigian.Add(cn);
+                if (dl.congno != null) dl.congno = dl.congno + tongtien;
+                else dl.congno = tongtien;
 
                 phieuxuat.ctpx = ctpx;
                 db.phieuxuat.Add(phieuxuat);
@@ -196,6 +191,23 @@ namespace ctyppsachmvc.Controllers
                         return re(phieuxuat);
                     }
                     tongtien += (int)(ct.soluong * s.giaxuat);
+                }
+
+                //cap nhat cong no
+                daily dl = db.daily.Find(phieuxuat.iddl);
+                if (dl.congno > 0 && tongtien > dl.congno)
+                {
+                    ModelState.AddModelError("", "tong tien phieu xuat lon hon cong no hien tai cua dai ly");
+                    phieuxuat.ctpx = ctpx;
+                    return re(phieuxuat);
+                }
+
+                if (dl.congno != null) dl.congno = dl.congno + tongtien - tongtiencu;
+                if(dl.congno < 0)
+                {
+                    ModelState.AddModelError("", "cong no dai ly la so am => co sach da ban trong phieu chua sua");
+                    phieuxuat.ctpx = ctpx;
+                    return re(phieuxuat);
                 }
 
                 foreach (ctpx ct in ctpx)

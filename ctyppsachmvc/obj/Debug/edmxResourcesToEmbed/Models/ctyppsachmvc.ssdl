@@ -47,6 +47,7 @@
     <Property Name="tendl" Type="nvarchar" MaxLength="50" />
     <Property Name="diachi" Type="nvarchar" MaxLength="50" />
     <Property Name="sodt" Type="nvarchar" MaxLength="15" />
+    <Property Name="congno" Type="decimal" Precision="10" Scale="0" />
   </EntityType>
   <EntityType Name="danhmucsachdaban">
     <Key>
@@ -83,6 +84,7 @@
     <Property Name="diachi" Type="nvarchar" MaxLength="50" />
     <Property Name="sodt" Type="nvarchar" MaxLength="15" />
     <Property Name="sotk" Type="nvarchar" MaxLength="50" />
+    <Property Name="sotienphaitra" Type="decimal" Precision="10" Scale="0" />
   </EntityType>
   <EntityType Name="phieunhap">
     <Key>
