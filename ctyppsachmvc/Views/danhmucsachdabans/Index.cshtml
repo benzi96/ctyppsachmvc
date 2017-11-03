@@ -12,16 +12,16 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.thoigian)
+            Thời gian
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.sotiendathanhtoan)
+            Số tiền đã thanh toán
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.sotienconno)
+            Số tiền còn nợ
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.daily.tendl)
+            Tên đại lý
         </th>
         <th></th>
     </tr>
@@ -43,7 +43,12 @@
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.iddmsdb }) |
             @Html.ActionLink("Details", "Details", new { id=item.iddmsdb }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.iddmsdb })
+            @*@Html.ActionLink("Delete", "Delete", new { id=item.iddmsdb })*@
+            @using (Html.BeginForm("edittratien", "danhmucsachdabans", FormMethod.Post))
+            {
+                @Html.Hidden("iddmsdb", item.iddmsdb)
+                <input type="submit" value="Thanh toán" class="btn btn-default" />
+            }
         </td>
     </tr>
 }

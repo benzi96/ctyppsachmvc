@@ -127,6 +127,7 @@
     <Property Name="sotientra" Type="Decimal" Precision="10" Scale="1" />
     <Property Name="tinhtrang" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="nxb" Relationship="Self.FK__phieutrat__idnxb__4E88ABD4" FromRole="phieutratien" ToRole="nxb" />
+    <Property Name="ngaytaophieu" Type="DateTime" Precision="3" />
   </EntityType>
   <EntityType Name="phieuxuat">
     <Key>

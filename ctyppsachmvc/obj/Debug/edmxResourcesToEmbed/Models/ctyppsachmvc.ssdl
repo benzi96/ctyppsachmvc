@@ -104,6 +104,7 @@
     <Property Name="idnxb" Type="int" />
     <Property Name="sotientra" Type="decimal" Precision="10" Scale="1" />
     <Property Name="tinhtrang" Type="nvarchar" MaxLength="50" />
+    <Property Name="ngaytaophieu" Type="datetime" />
   </EntityType>
   <EntityType Name="phieuxuat">
     <Key>

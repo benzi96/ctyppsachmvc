@@ -12,7 +12,7 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>danhmucsachdaban</h4>
+        <h4>Danh mục sách đã bán</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
@@ -26,7 +26,7 @@
         <div class="form-group">
             @Html.Label("Thời gian", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.danhmucsachdaban.thoigian, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.danhmucsachdaban.thoigian, new { htmlAttributes = new { @class = "datepicker form-control", autocomplete = "off" } })
                 @Html.ValidationMessageFor(model => model.danhmucsachdaban.thoigian, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -46,41 +46,58 @@
                 @Html.ValidationMessageFor(model => model.danhmucsachdaban.sotienconno, "", new { @class = "text-danger" })
             </div>
         </div>
+    </div>
 
-        <div class="form-inline">
-            <h4>Thêm chi tiết vào báo cáo</h4>
-            <hr />
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
-            @Html.LabelFor(model => model.ctdmsdb.idsach, "Tên sách")
-            <div class="form-group">
-                @Html.DropDownList("idsach", null, htmlAttributes: new { @class = "form-control", @id = "item" })
-                @Html.ValidationMessageFor(model => model.ctdmsdb.idsach, "", new { @class = "text-danger" })
-            </div>
-
-            @Html.LabelFor(model => model.ctdmsdb.soluong, "Số lượng")
-            <div class="form-group">
-                @Html.EditorFor(model => model.ctdmsdb.soluong, new { htmlAttributes = new { @class = "form-control", @id = "amount" } })
-                @Html.ValidationMessageFor(model => model.ctdmsdb.soluong, "", new { @class = "text-danger" })
-            </div>
-            <div class="form-group">
-                <input type="button" id="btnAdd" class="btn btn-default" value="Add" />
-            </div>
-        </div>
+    <div class="form-inline">
+        <h4>Thêm chi tiết vào báo cáo</h4>
         <hr />
-        <table class="table" id="chitiet">
-            <tr>
-                <td>ID</td>
-                <td>ID Sách</td>
-                <td>Tên Sách</td>
-                <td>Số lượng đã bán</td>
-                <td></td>
-            </tr>
-        </table>
-        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        @Html.LabelFor(model => model.ctdmsdb.idsach, "Tên sách")
         <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
+            @Html.DropDownList("idsach", null, htmlAttributes: new { @class = "form-control", @id = "item" })
+            @Html.ValidationMessageFor(model => model.ctdmsdb.idsach, "", new { @class = "text-danger" })
+        </div>
+
+        @Html.LabelFor(model => model.ctdmsdb.soluong, "Số lượng")
+        <div class="form-group">
+            @Html.EditorFor(model => model.ctdmsdb.soluong, new { htmlAttributes = new { @class = "form-control", @id = "amount" } })
+            @Html.ValidationMessageFor(model => model.ctdmsdb.soluong, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group">
+            <input type="button" id="btnAdd" class="btn btn-default" value="Add" />
+        </div>
+    </div>
+
+    <hr />
+    <table class="table" id="chitiet">
+        <tr>
+            <td>ID</td>
+            <td>ID Sách</td>
+            <td>Tên Sách</td>
+            <td>Số lượng đã bán</td>
+            <td></td>
+        </tr>
+        @if (Model != null)
+        {
+            foreach (var ct in Model.danhmucsachdaban.ctdmsdb)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => ct.idctdmsdb)</td>
+                    <td>@Html.DisplayFor(modelItem => ct.idsach)</td>
+                    <td>@Html.DisplayFor(modelItem => ct.sach.tensach)</td>
+                    <td>@Html.DisplayFor(modelItem => ct.soluong)</td>
+                    <td><button class="btn btn-danger btnDelete">Delete</button></td>
+                    @Html.Hidden("ct.Index", ct.idctdmsdb)
+                    @Html.Hidden("ct[" + ct.idctdmsdb + "].idsach", ct.idsach)
+                    @Html.Hidden("ct[" + ct.idctdmsdb + "].soluong", ct.soluong)
+                </tr>
+            }
+        }
+    </table>
+    <hr />
+    <div class="form-group">
+        <input type="submit" value="Create" class="btn btn-default" />
     </div>
 }
 
@@ -90,5 +107,6 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jqueryui")
     @Scripts.Render("~/bundles/mycustomjquery")
 }

@@ -107,6 +107,7 @@
     <EntitySetMapping Name="phieutratien">
       <EntityTypeMapping TypeName="ctyppsachModel.phieutratien">
         <MappingFragment StoreEntitySet="phieutratien">
+          <ScalarProperty Name="ngaytaophieu" ColumnName="ngaytaophieu" />
           <ScalarProperty Name="idptt" ColumnName="idptt" />
           <ScalarProperty Name="idnxb" ColumnName="idnxb" />
           <ScalarProperty Name="sotientra" ColumnName="sotientra" />

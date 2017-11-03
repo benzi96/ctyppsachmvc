@@ -18,6 +18,7 @@ namespace ctyppsachmvc.Models
         public Nullable<int> idnxb { get; set; }
         public Nullable<decimal> sotientra { get; set; }
         public string tinhtrang { get; set; }
+        public Nullable<System.DateTime> ngaytaophieu { get; set; }
     
         public virtual nxb nxb { get; set; }
     }

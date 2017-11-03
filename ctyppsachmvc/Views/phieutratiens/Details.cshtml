@@ -1,0 +1,42 @@
+﻿@model ctyppsachmvc.Models.phieutratien
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>phieutratien</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.sotientra)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.sotientra)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tinhtrang)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tinhtrang)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.nxb.tennxb)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nxb.tennxb)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.idptt }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

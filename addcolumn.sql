@@ -10,3 +10,6 @@ add sotienphaitra decimal(10,0);
 
 alter table daily
 add congno decimal(10,0);
+
+alter table phieutratien
+add ngaytaophieu datetime;

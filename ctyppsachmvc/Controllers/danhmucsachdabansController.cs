@@ -82,8 +82,9 @@ namespace ctyppsachmvc.Controllers
                     tongtien += (decimal)(ct.soluong * htdl.sach.giaxuat);
 
                     //tim nxb cua cuon sach da duoc ban nay
-                    nxb n = db.nxb.Find(ct.sach.idnxb);
-                    n.sotienphaitra += ct.soluong * ct.sach.gianhap;
+                    sach s = db.sach.Find(ct.idsach);
+                    nxb n = db.nxb.Find(s.idnxb);
+                    n.sotienphaitra += ct.soluong * s.gianhap;
                 }
                 danhmucsachdaban.ctdmsdb = ctdmsdb;
                 db.danhmucsachdaban.Add(danhmucsachdaban);
@@ -119,6 +120,10 @@ namespace ctyppsachmvc.Controllers
         public ActionResult Edit([Bind(Prefix = "danhmucsachdaban")] danhmucsachdaban danhmucsachdaban,
                                  [Bind(Prefix = "ct")] ctdmsdb[] ctdmsdb)
         {
+            ViewBag.iddl = new SelectList(db.daily, "iddl", "tendl", danhmucsachdaban.iddl);
+            ViewBag.idsach = new SelectList(db.sach, "idsach", "tensach");
+            danhmucsachdabanviewmodel dmvm = new danhmucsachdabanviewmodel();
+
             if (ModelState.IsValid)
             {
                 int iddmsdb = danhmucsachdaban.iddmsdb;
@@ -141,9 +146,9 @@ namespace ctyppsachmvc.Controllers
                     ht.soluongchuaban = (int)(ht.soluongchuaban - ct.soluong);
                     if (ht.soluongchuaban < 0)
                     {
-                        ViewBag.iddl = new SelectList(db.daily, "iddl", "tendl", danhmucsachdaban.iddl);
-                        ViewBag.idsach = new SelectList(db.sach, "idsach", "tensach");
-                        return View();
+                        danhmucsachdaban.ctdmsdb = ctdmsdb;
+                        dmvm.danhmucsachdaban = danhmucsachdaban;
+                        return View(dmvm);
                     }
                     nxb n = db.nxb.Find(ct.sach.idnxb);
                     n.sotienphaitra += ct.soluong * ct.sach.gianhap;
@@ -154,9 +159,9 @@ namespace ctyppsachmvc.Controllers
                     n.sotienphaitra -= ct.soluong * ct.sach.gianhap;
                     if (n.sotienphaitra < 0)
                     {
-                        ViewBag.iddl = new SelectList(db.daily, "iddl", "tendl", danhmucsachdaban.iddl);
-                        ViewBag.idsach = new SelectList(db.sach, "idsach", "tensach");
-                        return View();
+                        danhmucsachdaban.ctdmsdb = ctdmsdb;
+                        dmvm.danhmucsachdaban = danhmucsachdaban;
+                        return View(dmvm);
                     }
                     db.ctdmsdb.Remove(ct);
                 }
@@ -165,35 +170,44 @@ namespace ctyppsachmvc.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.iddl = new SelectList(db.daily, "iddl", "tendl", danhmucsachdaban.iddl);
-            return View(danhmucsachdaban);
+            danhmucsachdaban.ctdmsdb = ctdmsdb;
+            dmvm.danhmucsachdaban = danhmucsachdaban;
+            return View(dmvm);
         }
 
-        // GET: danhmucsachdabans/Delete/5
-        public ActionResult Delete(int? id)
+        public ActionResult edittratien(int iddmsdb)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            danhmucsachdaban danhmucsachdaban = db.danhmucsachdaban.Find(id);
-            if (danhmucsachdaban == null)
-            {
-                return HttpNotFound();
-            }
-            return View(danhmucsachdaban);
-        }
-
-        // POST: danhmucsachdabans/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            danhmucsachdaban danhmucsachdaban = db.danhmucsachdaban.Find(id);
-            db.danhmucsachdaban.Remove(danhmucsachdaban);
+            danhmucsachdaban dm = db.danhmucsachdaban.Find(iddmsdb);
+            dm.sotiendathanhtoan = db.ctdmsdb.Where(ct => ct.iddmsdb == iddmsdb).Select(ct => ct.soluong * ct.sach.giaxuat).DefaultIfEmpty(0).Sum();
             db.SaveChanges();
-            return RedirectToAction("Index");
+            var danhmucsachdaban = db.danhmucsachdaban.Include(d => d.daily);
+            return View(danhmucsachdaban.ToList());
         }
+        //// GET: danhmucsachdabans/Delete/5
+        //public ActionResult Delete(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    danhmucsachdaban danhmucsachdaban = db.danhmucsachdaban.Find(id);
+        //    if (danhmucsachdaban == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(danhmucsachdaban);
+        //}
+
+        //// POST: danhmucsachdabans/Delete/5
+        //[HttpPost, ActionName("Delete")]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult DeleteConfirmed(int id)
+        //{
+        //    danhmucsachdaban danhmucsachdaban = db.danhmucsachdaban.Find(id);
+        //    db.danhmucsachdaban.Remove(danhmucsachdaban);
+        //    db.SaveChanges();
+        //    return RedirectToAction("Index");
+        //}
 
         protected override void Dispose(bool disposing)
         {
