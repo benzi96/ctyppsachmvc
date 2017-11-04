@@ -13,3 +13,7 @@ add congno decimal(10,0);
 
 alter table phieutratien
 add ngaytaophieu datetime;
+
+--version 2.3
+alter table danhmucsachdaban
+add tinhtrang varchar(50);

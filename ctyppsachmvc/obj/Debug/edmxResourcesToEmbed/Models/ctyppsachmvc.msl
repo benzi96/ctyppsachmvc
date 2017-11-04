@@ -55,6 +55,7 @@
     <EntitySetMapping Name="danhmucsachdaban">
       <EntityTypeMapping TypeName="ctyppsachModel.danhmucsachdaban">
         <MappingFragment StoreEntitySet="danhmucsachdaban">
+          <ScalarProperty Name="tinhtrang" ColumnName="tinhtrang" />
           <ScalarProperty Name="iddmsdb" ColumnName="iddmsdb" />
           <ScalarProperty Name="iddl" ColumnName="iddl" />
           <ScalarProperty Name="thoigian" ColumnName="thoigian" />

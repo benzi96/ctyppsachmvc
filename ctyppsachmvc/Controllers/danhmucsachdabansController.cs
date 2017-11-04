@@ -59,6 +59,7 @@ namespace ctyppsachmvc.Controllers
         {
             if (ModelState.IsValid)
             {
+                danhmucsachdaban.tinhtrang = "Waiting";
                 int iddmsdb = 1;
                 if (db.danhmucsachdaban.Any())
                     iddmsdb = db.danhmucsachdaban.Max(o => o.iddmsdb) + 1;
@@ -184,6 +185,8 @@ namespace ctyppsachmvc.Controllers
         {
             danhmucsachdaban dm = db.danhmucsachdaban.Find(iddmsdb);
             dm.sotiendathanhtoan = db.ctdmsdb.Where(ct => ct.iddmsdb == iddmsdb).Select(ct => ct.soluong * ct.sach.giaxuat).DefaultIfEmpty(0).Sum();
+            dm.sotienconno = 0;
+            dm.tinhtrang = "Completed";
             db.SaveChanges();
         }
         //// GET: danhmucsachdabans/Delete/5

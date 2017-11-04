@@ -58,6 +58,7 @@
     <Property Name="thoigian" Type="datetime" />
     <Property Name="sotiendathanhtoan" Type="decimal" Precision="10" Scale="1" />
     <Property Name="sotienconno" Type="decimal" Precision="10" Scale="1" />
+    <Property Name="tinhtrang" Type="varchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="hangtoncuadaily">
     <Key>

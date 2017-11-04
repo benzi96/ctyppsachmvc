@@ -71,6 +71,7 @@
     <Property Name="sotienconno" Type="Decimal" Precision="10" Scale="1" />
     <NavigationProperty Name="ctdmsdb" Relationship="Self.FK__ctdmsdb__iddmsdb__02FC7413" FromRole="danhmucsachdaban" ToRole="ctdmsdb" />
     <NavigationProperty Name="daily" Relationship="Self.FK__danhmucsac__iddl__44FF419A" FromRole="danhmucsachdaban" ToRole="daily" />
+    <Property Name="tinhtrang" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="hangtoncuadaily">
     <Key>

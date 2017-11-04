@@ -25,6 +25,7 @@ namespace ctyppsachmvc.Models
         public Nullable<System.DateTime> thoigian { get; set; }
         public Nullable<decimal> sotiendathanhtoan { get; set; }
         public Nullable<decimal> sotienconno { get; set; }
+        public string tinhtrang { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ctdmsdb> ctdmsdb { get; set; }

@@ -63,6 +63,7 @@
           <Property Name="thoigian" Type="datetime" />
           <Property Name="sotiendathanhtoan" Type="decimal" Precision="10" Scale="1" />
           <Property Name="sotienconno" Type="decimal" Precision="10" Scale="1" />
+          <Property Name="tinhtrang" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="hangtoncuadaily">
           <Key>
@@ -516,6 +517,7 @@
           <Property Name="sotienconno" Type="Decimal" Precision="10" Scale="1" />
           <NavigationProperty Name="ctdmsdb" Relationship="Self.FK__ctdmsdb__iddmsdb__02FC7413" FromRole="danhmucsachdaban" ToRole="ctdmsdb" />
           <NavigationProperty Name="daily" Relationship="Self.FK__danhmucsac__iddl__44FF419A" FromRole="danhmucsachdaban" ToRole="daily" />
+          <Property Name="tinhtrang" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="hangtoncuadaily">
           <Key>
@@ -975,6 +977,7 @@
           <EntitySetMapping Name="danhmucsachdaban">
             <EntityTypeMapping TypeName="ctyppsachModel.danhmucsachdaban">
               <MappingFragment StoreEntitySet="danhmucsachdaban">
+                <ScalarProperty Name="tinhtrang" ColumnName="tinhtrang" />
                 <ScalarProperty Name="iddmsdb" ColumnName="iddmsdb" />
                 <ScalarProperty Name="iddl" ColumnName="iddl" />
                 <ScalarProperty Name="thoigian" ColumnName="thoigian" />
