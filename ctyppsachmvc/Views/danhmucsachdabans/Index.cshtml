@@ -44,7 +44,7 @@
             @Html.ActionLink("Edit", "Edit", new { id=item.iddmsdb }) |
             @Html.ActionLink("Details", "Details", new { id=item.iddmsdb }) |
             @*@Html.ActionLink("Delete", "Delete", new { id=item.iddmsdb })*@
-            @using (Html.BeginForm("edittratien", "danhmucsachdabans", FormMethod.Post))
+            @using (Html.BeginForm("Index", "danhmucsachdabans", FormMethod.Post))
             {
                 @Html.Hidden("iddmsdb", item.iddmsdb)
                 <input type="submit" value="Thanh toán" class="btn btn-default" />

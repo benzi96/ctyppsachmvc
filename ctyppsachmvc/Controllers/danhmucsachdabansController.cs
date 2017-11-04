@@ -15,8 +15,13 @@ namespace ctyppsachmvc.Controllers
         private ctyppsachEntities db = new ctyppsachEntities();
 
         // GET: danhmucsachdabans
-        public ActionResult Index()
+        public ActionResult Index(string iddmsdb)
         {
+            int id;
+            if(int.TryParse(iddmsdb, out id))
+            {
+                edittratien(id);
+            }
             var danhmucsachdaban = db.danhmucsachdaban.Include(d => d.daily);
             return View(danhmucsachdaban.ToList());
         }
@@ -175,13 +180,11 @@ namespace ctyppsachmvc.Controllers
             return View(dmvm);
         }
 
-        public ActionResult edittratien(int iddmsdb)
+        private void edittratien(int iddmsdb)
         {
             danhmucsachdaban dm = db.danhmucsachdaban.Find(iddmsdb);
             dm.sotiendathanhtoan = db.ctdmsdb.Where(ct => ct.iddmsdb == iddmsdb).Select(ct => ct.soluong * ct.sach.giaxuat).DefaultIfEmpty(0).Sum();
             db.SaveChanges();
-            var danhmucsachdaban = db.danhmucsachdaban.Include(d => d.daily);
-            return View(danhmucsachdaban.ToList());
         }
         //// GET: danhmucsachdabans/Delete/5
         //public ActionResult Delete(int? id)

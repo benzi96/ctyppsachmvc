@@ -89,9 +89,9 @@
                     <td>@Html.DisplayFor(modelItem => ct.sach.tensach)</td>
                     <td>@Html.DisplayFor(modelItem => ct.soluong)</td>
                     <td><button class="btn btn-danger btnDelete">Delete</button></td>
-                    @Html.Hidden("ct.Index", ct.idctdmsdb)
-                    @Html.Hidden("ct[" + ct.idctdmsdb + "].idsach", ct.idsach)
-                    @Html.Hidden("ct[" + ct.idctdmsdb + "].soluong", ct.soluong)
+                    @Html.Hidden("ct.Index", "a" + ct.idctdmsdb)
+                    @Html.Hidden("ct[" + "a" + ct.idctdmsdb + "].idsach", ct.idsach)
+                    @Html.Hidden("ct[" + "a" + ct.idctdmsdb + "].soluong", ct.soluong)
                 </tr>
             }
         }

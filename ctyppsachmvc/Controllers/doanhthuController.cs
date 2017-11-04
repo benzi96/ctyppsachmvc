@@ -15,18 +15,23 @@ namespace ctyppsachmvc.Controllers
         private ctyppsachEntities db = new ctyppsachEntities();
 
         // GET: doanhthu
-        public ActionResult Index(DateTime startdate, DateTime enddate)
+        public ActionResult Index(string tungay, string denngay)
         {
             doanhthuviewmodel dtvm = new doanhthuviewmodel();
-            dtvm.startdate = startdate;
-            dtvm.enddate = enddate;
-            dtvm.ctdt = db.ctdmsdb
-                        .Include(c => c.danhmucsachdaban)
-                        .Include(c => c.sach)
-                        .Where(o => o.danhmucsachdaban.thoigian > startdate && o.danhmucsachdaban.thoigian < enddate) //tim trong danh sach sach da ban trong khoang thoi gian
-                        .Select(c => new chitietdoanhthu(c)).ToList();
-            dtvm.doanhthu = tinhdoanhthu(dtvm.ctdt);
-            return View(dtvm);
+            DateTime startdate, enddate;
+            if (DateTime.TryParse(tungay, out startdate) && DateTime.TryParse(denngay, out enddate))
+            {
+                dtvm.startdate = startdate;
+                dtvm.enddate = enddate;
+                dtvm.ctdt = db.ctdmsdb
+                            .Include(c => c.danhmucsachdaban)
+                            .Include(c => c.sach)
+                            .Where(o => o.danhmucsachdaban.thoigian > startdate && o.danhmucsachdaban.thoigian < enddate) //tim trong danh sach sach da ban trong khoang thoi gian
+                            .Select(c => new chitietdoanhthu(c)).ToList();
+                dtvm.doanhthu = tinhdoanhthu(dtvm.ctdt);
+                return View(dtvm);
+            }
+            return View();
         }
 
         private decimal tinhdoanhthu(List<chitietdoanhthu> ctdt)
