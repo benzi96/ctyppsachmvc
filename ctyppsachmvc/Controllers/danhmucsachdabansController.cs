@@ -15,10 +15,16 @@ namespace ctyppsachmvc.Controllers
         private ctyppsachEntities db = new ctyppsachEntities();
 
         // GET: danhmucsachdabans
+        public ActionResult Index()
+        {
+            var danhmucsachdaban = db.danhmucsachdaban.Include(d => d.daily);
+            return View(danhmucsachdaban.ToList());
+        }
+        [HttpPost]
         public ActionResult Index(string iddmsdb)
         {
             int id;
-            if(int.TryParse(iddmsdb, out id))
+            if (int.TryParse(iddmsdb, out id))
             {
                 edittratien(id);
             }
@@ -81,9 +87,12 @@ namespace ctyppsachmvc.Controllers
                     else
                     {
                         ModelState.AddModelError("", "số sách đã bán lớn hơn số sách xuất cho đại lý");
-                        ViewBag.iddl = new SelectList(db.daily, "iddl", "tendl", danhmucsachdaban.iddl);
                         ViewBag.idsach = new SelectList(db.sach, "idsach", "tensach");
-                        return View();
+                        danhmucsachdabanviewmodel dmvm = new danhmucsachdabanviewmodel();
+
+                        ViewBag.iddl = new SelectList(db.daily, "iddl", "tendl", danhmucsachdaban.iddl);
+                        dmvm.danhmucsachdaban = danhmucsachdaban;
+                        return View(dmvm);
                     }
                     tongtien += (decimal)(ct.soluong * htdl.sach.giaxuat);
 
@@ -97,9 +106,12 @@ namespace ctyppsachmvc.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.idsach = new SelectList(db.sach, "idsach", "tensach");
+            danhmucsachdabanviewmodel dmvm = new danhmucsachdabanviewmodel();
 
             ViewBag.iddl = new SelectList(db.daily, "iddl", "tendl", danhmucsachdaban.iddl);
-            return View(danhmucsachdaban);
+            dmvm.danhmucsachdaban = danhmucsachdaban;
+            return View(dmvm);
         }
 
         // GET: danhmucsachdabans/Edit/5
@@ -114,8 +126,13 @@ namespace ctyppsachmvc.Controllers
             {
                 return HttpNotFound();
             }
+            
+            ViewBag.idsach = new SelectList(db.sach, "idsach", "tensach");
+            danhmucsachdabanviewmodel dmvm = new danhmucsachdabanviewmodel();
+
             ViewBag.iddl = new SelectList(db.daily, "iddl", "tendl", danhmucsachdaban.iddl);
-            return View(danhmucsachdaban);
+            dmvm.danhmucsachdaban = danhmucsachdaban;
+            return View(dmvm);
         }
 
         // POST: danhmucsachdabans/Edit/5

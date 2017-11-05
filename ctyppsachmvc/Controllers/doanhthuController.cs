@@ -26,7 +26,7 @@ namespace ctyppsachmvc.Controllers
                 dtvm.ctdt = db.ctdmsdb
                             .Include(c => c.danhmucsachdaban)
                             .Include(c => c.sach)
-                            .Where(o => o.danhmucsachdaban.thoigian > startdate && o.danhmucsachdaban.thoigian < enddate) //tim trong danh sach sach da ban trong khoang thoi gian
+                            .Where(o => o.danhmucsachdaban.thoigian >= startdate && o.danhmucsachdaban.thoigian <= enddate) //tim trong danh sach sach da ban trong khoang thoi gian
                             .Select(c => new chitietdoanhthu(c)).ToList();
                 dtvm.doanhthu = tinhdoanhthu(dtvm.ctdt);
                 return View(dtvm);
