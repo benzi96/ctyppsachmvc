@@ -15,13 +15,16 @@
             Thời gian
         </th>
         <th>
-            Số tiền đã thanh toán
+            Tên đại lý
         </th>
         <th>
             Số tiền còn nợ
         </th>
         <th>
-            Tên đại lý
+            Số tiền đã thanh toán
+        </th>
+        <th>
+            Tình trạng
         </th>
         <th></th>
     </tr>
@@ -32,17 +35,20 @@
             @Html.DisplayFor(modelItem => item.thoigian)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.sotiendathanhtoan)
+            @Html.DisplayFor(modelItem => item.daily.tendl)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.sotienconno)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.daily.tendl)
+            @Html.DisplayFor(modelItem => item.sotiendathanhtoan)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tinhtrang)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.iddmsdb }) |
-            @Html.ActionLink("Details", "Details", new { id=item.iddmsdb }) |
+            @Html.ActionLink("Details", "Details", new { id=item.iddmsdb })
             @*@Html.ActionLink("Delete", "Delete", new { id=item.iddmsdb })*@
             @using (Html.BeginForm("Index", "danhmucsachdabans", FormMethod.Post))
             {

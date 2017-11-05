@@ -63,9 +63,11 @@ namespace ctyppsachmvc.Controllers
         public ActionResult Create([Bind(Prefix ="danhmucsachdaban")] danhmucsachdaban danhmucsachdaban,
                                    [Bind(Prefix = "ct")] ctdmsdb[] ctdmsdb)
         {
+            danhmucsachdabanviewmodel dmvm = new danhmucsachdabanviewmodel();
             if (ModelState.IsValid)
             {
                 danhmucsachdaban.tinhtrang = "Waiting";
+                danhmucsachdaban.sotiendathanhtoan = 0;
                 int iddmsdb = 1;
                 if (db.danhmucsachdaban.Any())
                     iddmsdb = db.danhmucsachdaban.Max(o => o.iddmsdb) + 1;
@@ -88,8 +90,6 @@ namespace ctyppsachmvc.Controllers
                     {
                         ModelState.AddModelError("", "số sách đã bán lớn hơn số sách xuất cho đại lý");
                         ViewBag.idsach = new SelectList(db.sach, "idsach", "tensach");
-                        danhmucsachdabanviewmodel dmvm = new danhmucsachdabanviewmodel();
-
                         ViewBag.iddl = new SelectList(db.daily, "iddl", "tendl", danhmucsachdaban.iddl);
                         dmvm.danhmucsachdaban = danhmucsachdaban;
                         return View(dmvm);
@@ -101,14 +101,13 @@ namespace ctyppsachmvc.Controllers
                     nxb n = db.nxb.Find(s.idnxb);
                     n.sotienphaitra += ct.soluong * s.gianhap;
                 }
+                danhmucsachdaban.sotienconno = tongtien;
                 danhmucsachdaban.ctdmsdb = ctdmsdb;
                 db.danhmucsachdaban.Add(danhmucsachdaban);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
             ViewBag.idsach = new SelectList(db.sach, "idsach", "tensach");
-            danhmucsachdabanviewmodel dmvm = new danhmucsachdabanviewmodel();
-
             ViewBag.iddl = new SelectList(db.daily, "iddl", "tendl", danhmucsachdaban.iddl);
             dmvm.danhmucsachdaban = danhmucsachdaban;
             return View(dmvm);
