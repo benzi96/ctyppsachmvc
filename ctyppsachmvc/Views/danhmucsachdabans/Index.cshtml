@@ -32,7 +32,7 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.thoigian)
+           @Html.DisplayFor(modelItem => item.thoigian)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.daily.tendl)
@@ -47,13 +47,23 @@
             @Html.DisplayFor(modelItem => item.tinhtrang)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.iddmsdb }) |
+            @if (item.tinhtrang == "Waiting")
+            {
+                @Html.ActionLink("Edit", "Edit", new { id = item.iddmsdb }) @:|
+            }                                                            
             @Html.ActionLink("Details", "Details", new { id=item.iddmsdb })
             @*@Html.ActionLink("Delete", "Delete", new { id=item.iddmsdb })*@
-            @using (Html.BeginForm("Index", "danhmucsachdabans", FormMethod.Post))
+            @if (item.tinhtrang == "Waiting")
             {
-                @Html.Hidden("iddmsdb", item.iddmsdb)
-                <input type="submit" value="Thanh toán" class="btn btn-default" />
+                @using (Html.BeginForm("Index", "danhmucsachdabans", FormMethod.Post))
+                {
+                    @Html.Hidden("iddmsdb", item.iddmsdb)
+                    <input type="submit" value="Thanh toán" class="btn btn-default" />
+                }
+            }
+            else
+            {
+                <input type="submit" value="Thanh toán" class="btn btn-default" disabled/>
             }
         </td>
     </tr>

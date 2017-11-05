@@ -157,12 +157,12 @@ namespace ctyppsachmvc.Controllers
                     hangtoncuadaily ht = db.hangtoncuadaily.FirstOrDefault(o => o.iddl == danhmucsachdaban.iddl && o.idsach == ct.idsach);
                     int hangtondaily = (int)(ht.soluongchuaban + ct.soluong);
                 }
-
+                decimal tongtien = 0;
                 //thêm chi tiết sửa vào database table hangtoncuadaily
                 foreach (ctdmsdb ct in ctdmsdb)
                 {
                     ct.iddmsdb = iddmsdb;
-                    ct.iddmsdb = idct;
+                    ct.idctdmsdb = idct;
                     idct++;
                     hangtoncuadaily ht = db.hangtoncuadaily.FirstOrDefault(o => o.iddl == danhmucsachdaban.iddl && o.idsach == ct.idsach);
                     ht.soluongchuaban = (int)(ht.soluongchuaban - ct.soluong);
@@ -172,8 +172,10 @@ namespace ctyppsachmvc.Controllers
                         dmvm.danhmucsachdaban = danhmucsachdaban;
                         return View(dmvm);
                     }
-                    nxb n = db.nxb.Find(ct.sach.idnxb);
-                    n.sotienphaitra += ct.soluong * ct.sach.gianhap;
+                    sach s = db.sach.Find(ct.idsach);
+                    nxb n = db.nxb.Find(s.idnxb);
+                    n.sotienphaitra += ct.soluong * s.gianhap;
+                    tongtien += (decimal)(ct.soluong * s.giaxuat);
                 }
                 foreach (ctdmsdb ct in ctcudmsdb)
                 {
@@ -188,6 +190,13 @@ namespace ctyppsachmvc.Controllers
                     db.ctdmsdb.Remove(ct);
                 }
 
+                foreach(ctdmsdb ct in ctdmsdb)
+                {
+                    db.ctdmsdb.Add(ct);
+                }
+                danhmucsachdaban.sotienconno = tongtien;
+                danhmucsachdaban.sotiendathanhtoan = 0;
+                danhmucsachdaban.tinhtrang = "Waiting";
                 db.Entry(danhmucsachdaban).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
