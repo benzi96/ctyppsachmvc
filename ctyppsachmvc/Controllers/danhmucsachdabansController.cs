@@ -212,6 +212,8 @@ namespace ctyppsachmvc.Controllers
             dm.sotiendathanhtoan = db.ctdmsdb.Where(ct => ct.iddmsdb == iddmsdb).Select(ct => ct.soluong * ct.sach.giaxuat).DefaultIfEmpty(0).Sum();
             dm.sotienconno = 0;
             dm.tinhtrang = "Completed";
+            daily dl = db.daily.Find(dm.iddl);
+            dl.congno -= dm.sotiendathanhtoan;
             db.SaveChanges();
         }
         //// GET: danhmucsachdabans/Delete/5

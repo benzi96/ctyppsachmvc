@@ -44,6 +44,38 @@
 
     </dl>
 </div>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("Tên sách")
+        </th>
+        <th>
+            @Html.DisplayName("Số lượng đã bán")
+        </th>
+        <th></th>
+    </tr>
+
+    @if (Model.ctdmsdb != null)
+    {
+        foreach (var item in Model.ctdmsdb)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.sach.tensach)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.soluong)
+                </td>
+            </tr>
+        }
+    }
+    else
+    {
+        <tr>
+                Không có chi tiết
+        </tr>
+    }
+</table>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.iddmsdb }) |
     @Html.ActionLink("Back to List", "Index")
