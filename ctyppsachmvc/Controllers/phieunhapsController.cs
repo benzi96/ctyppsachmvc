@@ -64,6 +64,16 @@ namespace ctyppsachmvc.Controllers
                     ct.idctpn = idct;
                     idct++;
                     sach s = db.sach.Find(ct.idsach);
+                    if(s.idnxb != phieunhap.idnxb)
+                    {
+                        ModelState.AddModelError("", "nxb nay khong co ban cuon sach nay");
+                        ViewBag.idnxb = new SelectList(db.nxb, "idnxb", "tennxb", phieunhap.idnxb);
+                        ViewBag.idsach = new SelectList(db.sach, "idsach", "tensach");
+                        phieunhap.ctpn = ctpn;
+                        phieunhapviewmodel pnvm = new phieunhapviewmodel();
+                        pnvm.phieunhap = phieunhap;
+                        return View(pnvm);
+                    }
                     if (s.soluongton != null) s.soluongton = s.soluongton + ct.soluong;
                     else s.soluongton = ct.soluong;
                 }
